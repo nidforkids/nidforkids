@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NID For Kids 線上報名｜兒童體適能與跑步課程報名表單。">
+  <title>線上報名｜NID For Kids</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="enroll.css">
+</head>
+<body>
+
+  <!-- ============= NAV ============= -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo-nav-kids-only.png" alt="NID For Kids" class="nav-logo-img">
+        <span class="nav-name">NID For Kids</span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#about">關於</a>
+        <a href="index.html#courses">課程</a>
+        <a href="index.html#schedule">班次</a>
+        <a href="index.html#faq">常見問題</a>
+        <a href="index.html#contact" class="nav-cta">聯絡我們</a>
+      </div>
+      <button class="nav-toggle" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============= ENROLL ============= -->
+  <main class="enroll-page">
+    <!-- 表單區 -->
+    <section class="enroll-section" id="enroll-form-section">
+      <div class="container">
+        <div class="enroll-head">
+          <p class="enroll-eyebrow">ZERO TO HERO · ENROLLMENT</p>
+          <h1 class="enroll-title">
+            線上<br>
+            <span class="yellow">報名表。</span>
+          </h1>
+          <p class="enroll-lead">
+            填完後請於 24 小時內完成匯款，<br>
+            並到 LINE 官方帳號回報後 5 碼確認款項。
+          </p>
+        </div>
+
+        <form id="enroll-form" class="enroll-form" novalidate>
+
+          <!-- ========== Section A: 課程選擇 ========== -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-num">A</span>
+              <h2>選擇課程</h2>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="course">課程班次 <span class="required">*</span></label>
+              <select id="course" name="course" required class="form-select">
+                <option value="">— 請選擇 —</option>
+                <optgroup label="📍 板橋第一運動場">
+                  <option value="板橋第一運動場 | 週四 16:45 | 幼兒體適能班" data-price="450" data-classes="12">週四 16:45 ｜ 幼兒體適能班（4-6 歲）</option>
+                  <option value="板橋第一運動場 | 週四 17:45 | 兒童趣味跑步班" data-price="450" data-classes="12">週四 17:45 ｜ 兒童趣味跑步班（6-12 歲）</option>
+                </optgroup>
+                <optgroup label="📍 台北田徑場">
+                  <option value="台北田徑場 | 週五 16:45 | 幼兒體適能班" data-price="450" data-classes="12">週五 16:45 ｜ 幼兒體適能班(4-6 歲)</option>
+                  <option value="台北田徑場 | 週五 17:45 | 兒童趣味跑步班" data-price="450" data-classes="12">週五 17:45 ｜ 兒童趣味跑步班(6-12 歲)</option>
+                  <option value="台北田徑場 | 週六 09:00 | 幼兒體適能班" data-price="450" data-classes="12">週六 09:00 ｜ 幼兒體適能班(4-6 歲)</option>
+                  <option value="台北田徑場 | 週六 10:00 | 兒童趣味跑步班" data-price="400" data-classes="12" data-original-price="450" data-early-bird="true">週六 10:00 ｜ 兒童趣味跑步班(6-12 歲) 🏷 早鳥優惠</option>
+                </optgroup>
+              </select>
+
+              <div id="price-display" class="price-display" style="display:none;">
+                <div class="price-display-row">
+                  <span class="price-display-label">單堂費用</span>
+                  <span class="price-display-value" id="display-per-class">—</span>
+                </div>
+                <div class="price-display-row">
+                  <span class="price-display-label">課程堂數</span>
+                  <span class="price-display-value" id="display-classes">—</span>
+                </div>
+                <div class="price-display-row total">
+                  <span class="price-display-label">總費用</span>
+                  <span class="price-display-value total" id="display-total">—</span>
+                </div>
+                <p class="price-display-note" id="price-discount-note" style="display:none;"></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ========== Section B: 孩子資料 ========== -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-num">B</span>
+              <h2>孩子的資料</h2>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-row">
+                <label class="form-label" for="child_name">孩子姓名 <span class="required">*</span></label>
+                <input type="text" id="child_name" name="child_name" required class="form-input" placeholder="王小明">
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="child_age">孩子年齡 <span class="required">*</span></label>
+                <select id="child_age" name="child_age" required class="form-select">
+                  <option value="">— 請選擇 —</option>
+                  <option value="4">4 歲</option>
+                  <option value="5">5 歲</option>
+                  <option value="6">6 歲</option>
+                  <option value="7">7 歲</option>
+                  <option value="8">8 歲</option>
+                  <option value="9">9 歲</option>
+                  <option value="10">10 歲</option>
+                  <option value="11">11 歲</option>
+                  <option value="12">12 歲</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="child_gender">性別</label>
+                <select id="child_gender" name="child_gender" class="form-select">
+                  <option value="">— 請選擇 —</option>
+                  <option value="男">男生</option>
+                  <option value="女">女生</option>
+                  <option value="不公開">不公開</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="child_school">就讀學校或幼兒園</label>
+                <input type="text" id="child_school" name="child_school" class="form-input" placeholder="可選填">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="activity_level">平時運動習慣或活動量 <span class="required">*</span></label>
+              <select id="activity_level" name="activity_level" required class="form-select">
+                <option value="">— 請選擇 —</option>
+                <option value="幾乎不運動">幾乎不運動，回家就在家裡</option>
+                <option value="偶爾活動">偶爾活動，例如假日出去玩</option>
+                <option value="一週 1-2 次">一週 1-2 次運動</option>
+                <option value="一週 3-4 次">一週 3-4 次運動</option>
+                <option value="幾乎每天">幾乎每天都有運動</option>
+                <option value="校隊">有參加校隊或田徑隊</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="health_notes">需要特別留意的身體狀況</label>
+              <textarea id="health_notes" name="health_notes" class="form-textarea" rows="3" placeholder="例如：肌力不足、氣喘、過敏、近期受傷、注意力相關狀況等。沒有特殊狀況可填「無」。"></textarea>
+              <p class="form-hint">這些資訊只會給教練看，協助我們在課堂中給孩子合適的照顧。</p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="goal">課程目標或期待</label>
+              <textarea id="goal" name="goal" class="form-textarea" rows="3" placeholder="例如：希望孩子能愛上運動、想為某場比賽備戰、想改善體力等。"></textarea>
+            </div>
+          </div>
+
+          <!-- ========== Section C: 家長聯絡資訊 ========== -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-num">C</span>
+              <h2>家長聯絡方式</h2>
+            </div>
+
+            <div class="form-grid">
+              <div class="form-row">
+                <label class="form-label" for="parent_name">家長姓名 <span class="required">*</span></label>
+                <input type="text" id="parent_name" name="parent_name" required class="form-input" placeholder="王大明">
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="parent_relation">與孩子關係 <span class="required">*</span></label>
+                <select id="parent_relation" name="parent_relation" required class="form-select">
+                  <option value="">— 請選擇 —</option>
+                  <option value="父親">父親</option>
+                  <option value="母親">母親</option>
+                  <option value="祖父母">祖父母</option>
+                  <option value="其他親屬">其他親屬</option>
+                  <option value="監護人">監護人</option>
+                </select>
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="parent_phone">手機號碼 <span class="required">*</span></label>
+                <input type="tel" id="parent_phone" name="parent_phone" required class="form-input" placeholder="0912-345-678" pattern="[\d\-\s\+]{8,}">
+              </div>
+
+              <div class="form-row">
+                <label class="form-label" for="parent_email">Email <span class="required">*</span></label>
+                <input type="email" id="parent_email" name="parent_email" required class="form-input" placeholder="parent@example.com">
+                <p class="form-hint">用於寄送報名確認與匯款資訊</p>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="source">您從哪裡知道我們的？</label>
+              <select id="source" name="source" class="form-select">
+                <option value="">— 請選擇（選填）—</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Facebook">Facebook</option>
+                <option value="朋友介紹">朋友介紹</option>
+                <option value="NID Run Club">NID Run Club</option>
+                <option value="Google 搜尋">Google 搜尋</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- ========== 同意條款 ========== -->
+          <div class="form-section">
+            <div class="form-consent">
+              <label class="checkbox-label">
+                <input type="checkbox" id="agree" name="agree" required>
+                <span class="checkbox-mark"></span>
+                <span class="checkbox-text">
+                  我同意以下條款 <span class="required">*</span>
+                  <span class="consent-detail">
+                    ・我了解需於 24 小時內完成匯款，否則名額會釋出<br>
+                    ・我同意 NID For Kids 在課堂中拍攝照片作為品牌使用（如不願意請於上方備註）<br>
+                    ・我了解報名資訊將用於課程聯繫與緊急狀況通知
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submit-btn">
+              送出報名
+              <span class="btn-arrow">→</span>
+            </button>
+
+            <p class="form-disclaimer">
+              送出後系統會自動寄送匯款資訊到您的 Email，<br>
+              請於 24 小時內完成匯款並至 LINE 官方帳號回報後 5 碼。
+            </p>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- ========== Success Page (hidden by default) ========== -->
+    <section class="success-section" id="success-section" style="display: none;">
+      <div class="container">
+        <div class="success-card">
+          <div class="success-mark">✓</div>
+          <p class="success-eyebrow">ENROLLMENT RECEIVED</p>
+          <h1 class="success-title">
+            報名已收到！<br>
+            <span class="yellow">請於 24 小時內完成匯款。</span>
+          </h1>
+
+          <div class="payment-info">
+            <h2 class="payment-h">匯款資訊</h2>
+            <div class="payment-grid">
+              <div class="payment-item">
+                <span class="payment-label">戶名</span>
+                <span class="payment-value">恩艾迪有限公司</span>
+              </div>
+              <div class="payment-item">
+                <span class="payment-label">銀行</span>
+                <span class="payment-value">富邦銀行（012）</span>
+              </div>
+              <div class="payment-item">
+                <span class="payment-label">分行</span>
+                <span class="payment-value">東湖分行</span>
+              </div>
+              <div class="payment-item">
+                <span class="payment-label">帳號</span>
+                <span class="payment-value mono">686102009800</span>
+              </div>
+              <div class="payment-item highlight">
+                <span class="payment-label">金額</span>
+                <span class="payment-value" id="payment-amount">NT$ 5,400 <small id="payment-detail">（450 × 12 堂）</small></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="next-steps">
+            <h3>接下來請依以下步驟完成報名</h3>
+            <ol class="steps-list">
+              <li>
+                <span class="step-num">01</span>
+                <div>
+                  <strong>於 24 小時內完成匯款</strong>
+                  <p>逾期未匯款，名額將自動釋出。</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">02</span>
+                <div>
+                  <strong>加入 LINE 官方帳號</strong>
+                  <p>後續上課通知與調課，都會透過 LINE 聯繫。</p>
+                </div>
+              </li>
+              <li>
+                <span class="step-num">03</span>
+                <div>
+                  <strong>於 LINE 回報匯款帳號後 5 碼</strong>
+                  <p>我們會在收到後 24 小時內確認，並寄送上課須知。</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="success-actions">
+            <a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" class="btn btn-yellow">立即加入 LINE 官方</a>
+            <a href="index.html" class="btn btn-outline-dark">回到首頁</a>
+          </div>
+
+          <p class="success-note">
+            報名確認信已寄至您的 Email，<br>
+            若 5 分鐘內未收到，請檢查垃圾郵件夾或重新填寫。
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============= FOOTER ============= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <p class="footer-tagline">ZERO TO HERO</p>
+          <p class="footer-name">NID FOR KIDS</p>
+          <p class="footer-desc">A sister brand of NID Run Club.<br>陪孩子用運動長大。</p>
+        </div>
+        <div class="footer-links">
+          <p class="footer-h">COURSES</p>
+          <a href="courses/kids-fitness.html">幼兒體適能班</a>
+          <a href="courses/kids-running-fun.html">兒童趣味跑步班</a>
+          <a href="courses/kids-running-train.html">兒童跑步訓練班</a>
+        </div>
+        <div class="footer-links">
+          <p class="footer-h">CONNECT</p>
+          <a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">LINE 官方</a>
+          <a href="https://www.instagram.com/nidforkids" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:nidforkids@gmail.com">Email</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NID For Kids. All rights reserved.</span>
+        <span>Made with ♥ in Taipei</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="enroll.js"></script>
+</body>
+</html>
