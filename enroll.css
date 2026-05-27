@@ -302,6 +302,26 @@
   line-height: 1.8;
 }
 
+.consent-link {
+  color: var(--black);
+  font-weight: 700;
+  border-bottom: 2px solid var(--yellow);
+  padding-bottom: 1px;
+  transition: all 0.2s;
+}
+
+.consent-link:hover {
+  background: var(--yellow);
+  border-bottom-color: var(--yellow);
+}
+
+.consent-link::after {
+  content: " ↗";
+  font-family: var(--mono);
+  font-size: 0.9em;
+  margin-left: 0.15rem;
+}
+
 /* ============= Submit ============= */
 
 .btn-submit {

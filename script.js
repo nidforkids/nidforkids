@@ -8,7 +8,7 @@ const CONFIG = {
   // 🔑 將下方換成你的 Google Sheets ID（網址中間那一段亂碼）
   // 例：https://docs.google.com/spreadsheets/d/ABCDEFG1234567/edit
   //                                            ↑ 這段
-  SHEETS_ID: "",  // 留空時會用 fallback 靜態內容
+  SHEETS_ID: "1jCcnpZRiw3bZsfKOvr50AOxhsh1fdExx0kfCaHPB4t4",
 
   // Sheets 內的分頁名稱（必須跟你 Google Sheets 的分頁名稱一致）
   COURSES_SHEET: "courses",

@@ -1,0 +1,378 @@
+/* ============================
+   Terms & Conditions Page
+   ============================ */
+
+.terms-page {
+  background: var(--cream);
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+}
+
+.terms-head {
+  text-align: center;
+  margin: 4rem 0 5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.terms-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.25em;
+  color: var(--gray-500);
+  margin-bottom: 1.5rem;
+}
+
+.terms-title {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.15;
+  margin-bottom: 2rem;
+  letter-spacing: -0.01em;
+}
+
+.terms-lead {
+  font-size: 1.1rem;
+  color: var(--gray-700);
+  line-height: 1.9;
+  margin-bottom: 1.5rem;
+}
+
+.terms-updated {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--gray-500);
+}
+
+/* ============= Content ============= */
+
+.terms-content {
+  max-width: 820px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 4rem 3.5rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+}
+
+.term-section {
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.term-section:first-child {
+  padding-top: 0;
+}
+
+.term-section:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.term-head {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.term-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--black);
+  color: var(--yellow);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.term-head h2 {
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: var(--black);
+}
+
+.term-section p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--gray-900);
+  margin-bottom: 1rem;
+}
+
+.term-section p:last-child {
+  margin-bottom: 0;
+}
+
+.term-section strong {
+  font-weight: 700;
+  color: var(--black);
+}
+
+.term-h3 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--black);
+  margin: 1.5rem 0 0.85rem;
+}
+
+/* 條列 */
+.bullet-list,
+.special-list {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.bullet-list li,
+.special-list li {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--gray-900);
+  margin-bottom: 0.85rem;
+}
+
+.bullet-list li::marker {
+  color: var(--yellow);
+}
+
+.special-list li::marker {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+.special-list li:last-child,
+.bullet-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* 警示框 */
+.term-warning {
+  margin: 1.5rem 0;
+  padding: 1.25rem 1.5rem;
+  background: rgba(216, 58, 58, 0.05);
+  border-left: 3px solid #d83a3a;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--gray-900);
+}
+
+.term-warning strong {
+  color: #b22929;
+}
+
+.term-note {
+  margin: 1.25rem 0;
+  padding: 1.1rem 1.4rem;
+  background: rgba(245, 197, 24, 0.1);
+  border-left: 3px solid var(--yellow);
+  border-radius: 4px;
+  font-size: 0.95rem;
+  line-height: 1.85;
+  color: var(--gray-900);
+}
+
+.term-emphasis {
+  margin: 2rem 0 0;
+  padding: 1.75rem 2rem;
+  background: var(--cream);
+  border-radius: 4px;
+}
+
+.term-emphasis .term-h3 {
+  margin-top: 0;
+}
+
+/* ============= 退費卡片 ============= */
+
+.refund-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.refund-card {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: var(--cream);
+  border-radius: 4px;
+  border: 1.5px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.refund-card.disabled {
+  opacity: 0.65;
+}
+
+.refund-tag {
+  position: absolute;
+  top: -0.75rem;
+  left: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--black);
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.refund-card.disabled .refund-tag {
+  background: var(--gray-500);
+  color: var(--white);
+}
+
+.refund-card h4 {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: 0.6rem;
+  color: var(--black);
+}
+
+.refund-card p {
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  line-height: 1.8;
+}
+
+.refund-highlight {
+  color: #b22929;
+  font-weight: 700;
+}
+
+.refund-card.disabled .refund-highlight {
+  color: var(--gray-700);
+}
+
+/* ============= 公司資訊 ============= */
+
+.company-info {
+  margin-top: 2rem;
+  padding: 2rem !important;
+  background: var(--black);
+  color: var(--white);
+  border-radius: 4px;
+  border-bottom: none !important;
+}
+
+.company-info .term-h3 {
+  color: var(--yellow);
+  margin-top: 0;
+}
+
+.company-info p {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 2;
+  margin-bottom: 0;
+}
+
+.company-info strong {
+  color: var(--white);
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.15rem;
+}
+
+.company-info a.inline-link {
+  color: var(--yellow);
+  border-bottom-color: var(--yellow);
+}
+
+/* ============= 底部 CTA ============= */
+
+.terms-cta {
+  max-width: 820px;
+  margin: 5rem auto 0;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.terms-cta p {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.35rem;
+  margin-bottom: 2rem;
+  color: var(--black);
+}
+
+.terms-cta-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============= Responsive ============= */
+
+@media (max-width: 720px) {
+  .terms-page {
+    padding-top: 4.5rem;
+  }
+
+  .terms-head {
+    margin: 2rem 0 3rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .terms-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .term-section {
+    padding: 2rem 0;
+  }
+
+  .term-head {
+    gap: 1rem;
+  }
+
+  .term-num {
+    width: 40px;
+    height: 40px;
+    font-size: 0.95rem;
+  }
+
+  .term-head h2 {
+    font-size: 1.25rem;
+  }
+
+  .refund-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .term-emphasis {
+    padding: 1.25rem;
+  }
+
+  .company-info {
+    padding: 1.5rem !important;
+  }
+
+  .terms-cta {
+    padding: 2rem 1rem;
+  }
+
+  .terms-cta-actions {
+    flex-direction: column;
+  }
+
+  .terms-cta-actions .btn {
+    width: 100%;
+  }
+}
