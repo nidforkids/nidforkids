@@ -3,7 +3,7 @@
    ============================ */
 
 /* === 設定區（你要改的只有這裡） === */
-const GAS_WEBAPP_URL = ""; // 👈 將 Google Apps Script 部署後的 Web App URL 貼這裡
+const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwhPdydy5oWO6DPufyJVqzBnP5cZMAfqhzCII70vFx0_hI4GPp93Rwk4-FmWwOHgo0Y/exec";
 
 /* === DOM === */
 const form = document.getElementById("enroll-form");
