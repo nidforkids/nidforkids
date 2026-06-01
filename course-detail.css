@@ -539,3 +539,61 @@
     padding: 1.75rem;
   }
 }
+
+/* ============================
+   PRICE info-card 早鳥版
+   ============================ */
+
+.info-card-price {
+  background: linear-gradient(135deg, rgba(245, 197, 24, 0.08), rgba(245, 197, 24, 0.02));
+  border-color: rgba(245, 197, 24, 0.35) !important;
+  position: relative;
+}
+
+.info-card-price::before {
+  content: "🏷 早鳥";
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  background: var(--yellow);
+  color: var(--black);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+}
+
+.price-original-strike {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  text-decoration: line-through;
+  font-weight: 500;
+  font-family: var(--sans);
+}
+
+.price-discount {
+  display: inline-block;
+  font-family: var(--serif);
+  font-weight: 900;
+  font-size: 1.7rem;
+  color: var(--yellow);
+  line-height: 1.1;
+  margin-top: 0.2rem;
+}
+
+.info-value-sub {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  font-weight: 500;
+  font-family: var(--sans);
+  margin-top: 0.4rem;
+}
+
+@media (max-width: 720px) {
+  .price-discount {
+    font-size: 1.4rem;
+  }
+}

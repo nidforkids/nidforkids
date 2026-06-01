@@ -82,22 +82,127 @@ function renderCourses(courses) {
     });
 }
 
-/* ---------- Render: 班次 ---------- */
+/* ---------- Render: 班次 (v2 — 按課程分組) ---------- */
 function renderSchedule(rows) {
   if (!rows || !rows.length) return;
 
-  // 按 location 分組
+  // 按 course 分組
   const grouped = {};
   rows.forEach(r => {
-    const loc = r.location || "其他";
-    if (!grouped[loc]) {
-      grouped[loc] = {
-        area: r.location_address || r.area || "",
-        classes: []
-      };
+    const course = r.course || "其他";
+    if (!grouped[course]) {
+      grouped[course] = [];
     }
-    grouped[loc].classes.push(r);
+    grouped[course].push(r);
   });
+
+  // 課程 → 對應卡片 data-course 屬性
+  const courseMap = {
+    "幼兒跑步體適能班": "fitness",
+    "幼兒跑步體適能班": "fitness", // 舊名 fallback
+    "兒童趣味跑步班": "fun",
+    "兒童跑步訓練班": "train",
+  };
+
+  // 對每個課程卡片重新寫入班次
+  Object.entries(grouped).forEach(([courseName, classes]) => {
+    const tabKey = courseMap[courseName];
+    if (!tabKey) return;
+
+    const tab = document.querySelector(`.course-tab[data-course="${tabKey}"]`);
+    if (!tab) return;
+
+    const rowsList = tab.querySelector(".schedule-rows");
+    const priceBlock = tab.querySelector(".course-tab-price");
+    if (!rowsList) return;
+
+    // 排序:依星期+時間
+    const dayOrder = { "週一": 1, "週二": 2, "週三": 3, "週四": 4, "週五": 5, "週六": 6, "週日": 7 };
+    classes.sort((a, b) => {
+      const da = dayOrder[a.day] || 0;
+      const db = dayOrder[b.day] || 0;
+      if (da !== db) return da - db;
+      return String(a.time || "").localeCompare(String(b.time || ""));
+    });
+
+    const html = classes.map(c => {
+      const capacity = Number(c.capacity) || 0;
+      const enrolled = Number(c.enrolled) || 0;
+      const remaining = Math.max(capacity - enrolled, 0);
+
+      let spotsText = `剩 ${remaining} / ${capacity} 位`;
+      let cta;
+      if (remaining <= 0 || (c.status || "").includes("額滿")) {
+        spotsText = "額滿";
+        cta = `<span class="sr-cta" style="background:#666;cursor:not-allowed;">候補</span>`;
+      } else {
+        const params = new URLSearchParams({
+          course: c.course || "",
+          loc: c.location || "",
+          day: c.day || "",
+          time: c.time || "",
+        });
+        cta = `<a class="sr-cta" href="enroll.html?${params.toString()}">報名</a>`;
+      }
+
+      return `
+        <li class="schedule-row" data-course="${c.course}" data-loc="${c.location}" data-day="${c.day}" data-time="${c.time}">
+          <div class="sr-time">
+            <span class="sr-day">${c.day || ''}</span>
+            <span class="sr-hour">${c.time || ''}</span>
+          </div>
+          <div class="sr-loc">${c.location || ''}</div>
+          <div class="sr-meta"><span class="sr-spots">${spotsText}</span></div>
+          ${cta}
+        </li>
+      `;
+    }).join("");
+
+    rowsList.innerHTML = html;
+
+    // 更新價格區
+    if (priceBlock && classes.length > 0) {
+      const sample = classes[0];
+      const price = Number(sample.price) || 450;
+      const totalClasses = Number(sample.total_classes) || 12;
+      const earlyBirdPrice = Number(sample.early_bird_price) || 0;
+      const discountNote = sample.discount_note || "";
+
+      let priceHtml = `NT$ ${price}/堂 × ${totalClasses} 堂`;
+      if (earlyBirdPrice > 0) {
+        const tagText = discountNote || `早鳥 NT$ ${earlyBirdPrice}/堂`;
+        priceHtml += ` 　<span class="early-bird-tag">🏷 ${tagText} NT$ ${earlyBirdPrice}/堂</span>`;
+      }
+      priceBlock.innerHTML = priceHtml;
+    }
+  });
+}
+
+/* ---------- Course Tabs 展開/收合 ---------- */
+function initCourseTabs() {
+  const tabs = document.querySelectorAll(".course-tab");
+  tabs.forEach(tab => {
+    const head = tab.querySelector(".course-tab-head");
+    if (!head) return;
+    head.addEventListener("click", () => {
+      const isOpen = tab.classList.contains("is-open");
+      // 關閉所有
+      tabs.forEach(t => {
+        t.classList.remove("is-open");
+        const h = t.querySelector(".course-tab-head");
+        if (h) h.setAttribute("aria-expanded", "false");
+      });
+      // 若原本沒開,就打開
+      if (!isOpen) {
+        tab.classList.add("is-open");
+        head.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+}
+
+/* ---------- 舊版 renderSchedule (保留作 fallback) ---------- */
+function renderScheduleLegacy(rows) {
 
   const list = document.getElementById("schedule-list");
   list.innerHTML = "";
@@ -201,18 +306,8 @@ async function initData() {
   if (schedule) renderSchedule(schedule);
 }
 
-/* ---------- Hero 圖片輪播 ---------- */
-function initHeroSlider() {
-  const imgs = document.querySelectorAll(".hero-img");
-  if (imgs.length < 2) return;
-
-  let current = 0;
-  setInterval(() => {
-    imgs[current].classList.remove("active");
-    current = (current + 1) % imgs.length;
-    imgs[current].classList.add("active");
-  }, 5000);
-}
+/* ---------- Hero 圖片(已移除輪播,改為靜態) ---------- */
+// 原本的 initHeroSlider 已移除以提升頁面載入速度
 
 /* ---------- 導航：滾動變色 ---------- */
 function initNavScroll() {
@@ -267,9 +362,9 @@ function initScrollReveal() {
 
 /* ---------- 啟動 ---------- */
 document.addEventListener("DOMContentLoaded", () => {
-  initHeroSlider();
   initNavScroll();
   initNavToggle();
+  initCourseTabs();
   initScrollReveal();
   initData();
 });

@@ -279,3 +279,61 @@ function testEnroll() {
   sendParentEmail(fakeData);
   console.log("測試完成，請檢查 Sheets 與 Email");
 }
+
+
+/* ============================
+   v2 更新:課程改名 + 早鳥 9 折 + 新增週六 7:15 訓練班
+   執行方式:在 Apps Script 編輯器選擇 setupSheets,按 ▶ 執行
+   ============================ */
+function setupSheets() {
+  const ss = getSpreadsheet();
+
+  // 設定 courses
+  let coursesSheet = ss.getSheetByName("courses");
+  if (!coursesSheet) {
+    coursesSheet = ss.insertSheet("courses");
+  } else {
+    coursesSheet.clear();
+  }
+  const coursesData = [
+    ["order", "name", "age", "pillar", "tagline", "description", "features", "image", "link"],
+    [1, "幼兒跑步體適能班", "4 — 6 歲", "打基礎", "用遊戲,讓孩子愛上動。", "走、跑、跳、爬——這個階段不是學技術,是把身體用熟。讓孩子在玩之中,長出未來所有運動需要的底子。", "體能基礎,協調發展,規則理解,樂趣化學習", "assets/hero-3.jpg", "courses/kids-fitness.html"],
+    [2, "兒童趣味跑步班", "6 — 12 歲", "養興趣", "讓跑步,變成孩子想做的事。", "不是為了比賽,而是為了讓他真的喜歡上跑步。從正確姿勢開始,每堂課都有挑戰與成就感,孩子越跑越有自信。", "體能提升,協調訓練,跑姿優化,樂趣化學習", "assets/hero-1.jpg", "courses/kids-running-fun.html"],
+    [3, "兒童跑步訓練班", "6 — 12 歲", "練實力", "為想跑得更好的孩子設計。", "有比賽目標、有突破渴望——這堂課陪他系統性訓練。專項體能、跑姿優化、配速練習,讓努力被看見。", "專項訓練,體能強化,跑姿優化,賽事備戰", "assets/hero-4.jpg", "courses/kids-running-train.html"]
+  ];
+  coursesSheet.getRange(1, 1, coursesData.length, coursesData[0].length).setValues(coursesData);
+  coursesSheet.getRange(1, 1, 1, coursesData[0].length).setBackground("#0a0a0a").setFontColor("#F5C518").setFontWeight("bold");
+  coursesSheet.setFrozenRows(1);
+  coursesSheet.autoResizeColumns(1, coursesData[0].length);
+
+  // 設定 schedule (新增週六早上 7:15 跑步訓練班 + 早鳥 9 折)
+  let scheduleSheet = ss.getSheetByName("schedule");
+  if (!scheduleSheet) {
+    scheduleSheet = ss.insertSheet("schedule");
+  } else {
+    scheduleSheet.clear();
+  }
+  const scheduleData = [
+    ["location", "location_address", "day", "time", "course", "age", "capacity", "enrolled", "status", "price", "total_classes", "early_bird_price", "early_bird_until", "discount_note", "note"],
+    ["板橋第一運動場", "新北市板橋區", "週四", "16:45", "幼兒跑步體適能班", "4-6 歲", 6, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""],
+    ["板橋第一運動場", "新北市板橋區", "週四", "17:45", "兒童趣味跑步班", "6-12 歲", 10, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""],
+    ["台北田徑場", "台北市松山區", "週五", "16:45", "幼兒跑步體適能班", "4-6 歲", 6, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""],
+    ["台北田徑場", "台北市松山區", "週五", "17:45", "兒童趣味跑步班", "6-12 歲", 10, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""],
+    ["台北田徑場", "台北市松山區", "週六", "07:15", "兒童跑步訓練班", "6-12 歲", 20, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""],
+    ["台北田徑場", "台北市松山區", "週六", "09:00", "幼兒跑步體適能班", "4-6 歲", 6, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""],
+    ["台北田徑場", "台北市松山區", "週六", "10:00", "兒童趣味跑步班", "6-12 歲", 10, 0, "招生中", 450, 9, 405, "全新開班限定", "早鳥 9 折", ""]
+  ];
+  scheduleSheet.getRange(1, 1, scheduleData.length, scheduleData[0].length).setValues(scheduleData);
+  scheduleSheet.getRange(2, 4, scheduleData.length - 1, 1).setNumberFormat("@");
+  scheduleSheet.getRange(1, 1, 1, scheduleData[0].length).setBackground("#0a0a0a").setFontColor("#F5C518").setFontWeight("bold");
+  scheduleSheet.setFrozenRows(1);
+  scheduleSheet.autoResizeColumns(1, scheduleData[0].length);
+
+  console.log("✅ courses 分頁建立完成");
+  console.log("✅ schedule 分頁建立完成,共 " + (scheduleData.length - 1) + " 筆班次");
+  console.log("🎉 全部設定完成!");
+}
+
+function getSpreadsheet() {
+  return SpreadsheetApp.openById("1jCcnpZRiw3bZsfKOvr50AOxhsh1fdExx0kfCaHPB4t4");
+}

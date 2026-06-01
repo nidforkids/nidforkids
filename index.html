@@ -24,7 +24,7 @@
   <nav class="nav">
     <div class="nav-inner">
       <a href="#top" class="nav-logo">
-        <img src="assets/logo-nav-kids-only.png" alt="NID For Kids" class="nav-logo-img">
+        <img src="assets/logo-nav-kids-only.png" alt="NID For Kids" class="nav-logo-img" loading="lazy">
         <span class="nav-name">NID For Kids</span>
       </a>
       <div class="nav-links">
@@ -43,9 +43,7 @@
   <!-- ============= HERO ============= -->
   <header class="hero" id="top">
     <div class="hero-bg">
-      <img src="assets/hero-1.jpg" alt="" class="hero-img active" data-i="0">
-      <img src="assets/hero-2.jpg" alt="" class="hero-img" data-i="1">
-      <img src="assets/hero-4.jpg" alt="" class="hero-img" data-i="2">
+      <img src="assets/hero-1.jpg" alt="" class="hero-img active" loading="eager">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-grain"></div>
@@ -144,14 +142,14 @@
 
         <article class="course-card">
           <div class="course-card-img">
-            <img src="assets/hero-3.jpg" alt="幼兒體適能班">
+            <img src="assets/hero-3.jpg" alt="幼兒跑步體適能班" loading="lazy">
           </div>
           <div class="course-card-body">
             <div class="course-tag-row">
               <span class="course-tag">4 — 6 歲</span>
               <span class="course-pillar">打基礎</span>
             </div>
-            <h3 class="course-name">幼兒體適能班</h3>
+            <h3 class="course-name">幼兒跑步體適能班</h3>
             <p class="course-tagline">用遊戲，讓孩子愛上動。</p>
             <p class="course-desc">走、跑、跳、爬——這個階段不是學技術，是把身體用熟。讓孩子在玩之中，長出未來所有運動需要的底子。</p>
             <ul class="course-features">
@@ -165,7 +163,7 @@
 
         <article class="course-card">
           <div class="course-card-img">
-            <img src="assets/hero-1.jpg" alt="兒童趣味跑步班">
+            <img src="assets/hero-1.jpg" alt="兒童趣味跑步班" loading="lazy">
           </div>
           <div class="course-card-body">
             <div class="course-tag-row">
@@ -187,7 +185,7 @@
 
         <article class="course-card">
           <div class="course-card-img">
-            <img src="assets/hero-4.jpg" alt="兒童跑步訓練班">
+            <img src="assets/hero-4.jpg" alt="兒童跑步訓練班" loading="lazy">
           </div>
           <div class="course-card-body">
             <div class="course-tag-row">
@@ -223,104 +221,158 @@
         <span class="yellow">班次。</span>
       </h2>
 
-      <p class="section-lead light">依照地點為您整理所有班次。<br>不確定哪個適合？<a href="#contact" class="inline-link">私訊我們協助評估</a>。</p>
+      <p class="section-lead light">選擇你想看的課程,展開所有班次。<br>不確定哪個適合？<a href="#contact" class="inline-link">私訊我們協助評估</a>。</p>
 
-      <div class="schedule-list" id="schedule-list">
-        <!-- 動態載入，以下為 fallback -->
+      <!-- 期程資訊 -->
+      <p class="schedule-period">
+        <span class="period-badge">2026 夏季班</span>
+        <span class="period-text">7/1 — 8/30 ｜ 一期共 9 堂</span>
+      </p>
 
-        <div class="location-card">
-          <div class="location-head">
-            <h3 class="location-name">板橋第一運動場</h3>
-            <p class="location-area">新北市板橋區</p>
-          </div>
-          <div class="location-classes">
-            <div class="class-row">
-              <div class="class-info">
-                <span class="class-time">週四 16:45</span>
-                <span class="class-name">幼兒體適能班</span>
-                <span class="class-age">4-6 歲</span>
-                <div class="class-price"><span class="price-current">NT$ 450/堂</span> <span class="price-note">× 12 堂</span></div>
-              </div>
-              <div class="class-meta">
-                <span class="class-spots">剩 6 / 6 位</span>
-                <a href="enroll.html?course=幼兒體適能班&loc=板橋第一運動場&day=週四&time=16:45" class="class-enroll">立即報名</a>
-              </div>
+      <!-- 課程卡片(預設展開第一張) -->
+      <div class="course-tabs" id="course-tabs">
+
+        <!-- 卡片 1: 幼兒跑步體適能班 -->
+        <div class="course-tab is-open" data-course="fitness">
+          <button class="course-tab-head" type="button" aria-expanded="true">
+            <div class="course-tab-info">
+              <span class="course-tab-tag">4 — 6 歲 · 40 分鐘 · 9 堂</span>
+              <h3 class="course-tab-name">幼兒跑步體適能班</h3>
+              <p class="course-tab-desc">用遊戲,讓孩子愛上動。</p>
             </div>
-            <div class="class-row">
-              <div class="class-info">
-                <span class="class-time">週四 17:45</span>
-                <span class="class-name">兒童趣味跑步班</span>
-                <span class="class-age">6-12 歲</span>
-                <div class="class-price"><span class="price-current">NT$ 450/堂</span> <span class="price-note">× 12 堂</span></div>
-              </div>
-              <div class="class-meta">
-                <span class="class-spots">剩 10 / 10 位</span>
-                <a href="enroll.html?course=兒童趣味跑步班&loc=板橋第一運動場&day=週四&time=17:45" class="class-enroll">立即報名</a>
-              </div>
+            <span class="course-tab-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="course-tab-body">
+            <ul class="schedule-rows">
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週四</span>
+                  <span class="sr-hour">16:45-17:25</span>
+                </div>
+                <div class="sr-loc">板橋第一運動場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 6 / 6 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=幼兒跑步體適能班&loc=板橋第一運動場&day=週四&time=16:45">報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">16:45-17:25</span>
+                </div>
+                <div class="sr-loc">台北田徑場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 6 / 6 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=幼兒跑步體適能班&loc=台北田徑場&day=週五&time=16:45">報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">09:00-09:40</span>
+                </div>
+                <div class="sr-loc">台北田徑場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 6 / 6 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=幼兒跑步體適能班&loc=台北田徑場&day=週六&time=09:00">報名</a>
+              </li>
+            </ul>
+            <div class="course-tab-price">
+              <span class="price-line">原價 NT$ 4,050 (450 × 9 堂)</span>
+              <span class="early-bird-tag">🏷 新班早鳥 9 折 NT$ 3,645</span>
             </div>
           </div>
         </div>
 
-        <div class="location-card">
-          <div class="location-head">
-            <h3 class="location-name">台北田徑場</h3>
-            <p class="location-area">台北市松山區</p>
-          </div>
-          <div class="location-classes">
-            <div class="class-row">
-              <div class="class-info">
-                <span class="class-time">週五 16:45</span>
-                <span class="class-name">幼兒體適能班</span>
-                <span class="class-age">4-6 歲</span>
-                <div class="class-price"><span class="price-current">NT$ 450/堂</span> <span class="price-note">× 12 堂</span></div>
-              </div>
-              <div class="class-meta">
-                <span class="class-spots">剩 6 / 6 位</span>
-                <a href="enroll.html?course=幼兒體適能班&loc=台北田徑場&day=週五&time=16:45" class="class-enroll">立即報名</a>
-              </div>
+        <!-- 卡片 2: 兒童趣味跑步班 -->
+        <div class="course-tab" data-course="fun">
+          <button class="course-tab-head" type="button" aria-expanded="false">
+            <div class="course-tab-info">
+              <span class="course-tab-tag">6 — 12 歲 · 60 分鐘 · 9 堂</span>
+              <h3 class="course-tab-name">兒童趣味跑步班</h3>
+              <p class="course-tab-desc">讓跑步,變成孩子想做的事。</p>
             </div>
-            <div class="class-row">
-              <div class="class-info">
-                <span class="class-time">週五 17:45</span>
-                <span class="class-name">兒童趣味跑步班</span>
-                <span class="class-age">6-12 歲</span>
-                <div class="class-price"><span class="price-current">NT$ 450/堂</span> <span class="price-note">× 12 堂</span></div>
-              </div>
-              <div class="class-meta">
-                <span class="class-spots">剩 10 / 10 位</span>
-                <a href="enroll.html?course=兒童趣味跑步班&loc=台北田徑場&day=週五&time=17:45" class="class-enroll">立即報名</a>
-              </div>
-            </div>
-            <div class="class-row">
-              <div class="class-info">
-                <span class="class-time">週六 09:00</span>
-                <span class="class-name">幼兒體適能班</span>
-                <span class="class-age">4-6 歲</span>
-                <div class="class-price"><span class="price-current">NT$ 450/堂</span> <span class="price-note">× 12 堂</span></div>
-              </div>
-              <div class="class-meta">
-                <span class="class-spots">剩 6 / 6 位</span>
-                <a href="enroll.html?course=幼兒體適能班&loc=台北田徑場&day=週六&time=09:00" class="class-enroll">立即報名</a>
-              </div>
-            </div>
-            <div class="class-row">
-              <div class="class-info">
-                <span class="class-time">週六 10:00</span>
-                <span class="class-name">兒童趣味跑步班</span>
-                <span class="class-age">6-12 歲</span>
-                <div class="class-price has-discount">
-                  <span class="price-original">NT$ 450/堂</span>
-                  <span class="price-current">早鳥 NT$ 400/堂</span>
+            <span class="course-tab-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="course-tab-body">
+            <ul class="schedule-rows">
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週四</span>
+                  <span class="sr-hour">17:45-18:45</span>
                 </div>
-              </div>
-              <div class="class-meta">
-                <span class="class-spots">剩 10 / 10 位</span>
-                <a href="enroll.html?course=兒童趣味跑步班&loc=台北田徑場&day=週六&time=10:00" class="class-enroll">立即報名</a>
-              </div>
+                <div class="sr-loc">板橋第一運動場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 10 / 10 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=兒童趣味跑步班&loc=板橋第一運動場&day=週四&time=17:45">報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">17:45-18:45</span>
+                </div>
+                <div class="sr-loc">台北田徑場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 10 / 10 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=兒童趣味跑步班&loc=台北田徑場&day=週五&time=17:45">報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">10:00-11:00</span>
+                </div>
+                <div class="sr-loc">台北田徑場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 10 / 10 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=兒童趣味跑步班&loc=台北田徑場&day=週六&time=10:00">報名</a>
+              </li>
+            </ul>
+            <div class="course-tab-price">
+              <span class="price-line">原價 NT$ 4,050 (450 × 9 堂)</span>
+              <span class="early-bird-tag">🏷 新班早鳥 9 折 NT$ 3,645</span>
             </div>
           </div>
+        </div>
+
+        <!-- 卡片 3: 兒童跑步訓練班 -->
+        <div class="course-tab" data-course="train">
+          <button class="course-tab-head" type="button" aria-expanded="false">
+            <div class="course-tab-info">
+              <span class="course-tab-tag">6 — 12 歲 · 60 分鐘 · 9 堂</span>
+              <h3 class="course-tab-name">兒童跑步訓練班</h3>
+              <p class="course-tab-desc">為想跑得更好的孩子設計。</p>
+            </div>
+            <span class="course-tab-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="course-tab-body">
+            <ul class="schedule-rows">
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">07:15-08:15</span>
+                </div>
+                <div class="sr-loc">台北田徑場</div>
+                <div class="sr-meta"><span class="sr-spots">剩 20 / 20 位</span></div>
+                <a class="sr-cta" href="enroll.html?course=兒童跑步訓練班&loc=台北田徑場&day=週六&time=07:15">報名</a>
+              </li>
+            </ul>
+            <div class="course-tab-price">
+              <span class="price-line">原價 NT$ 4,050 (450 × 9 堂)</span>
+              <span class="early-bird-tag">🏷 新班早鳥 9 折 NT$ 3,645</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 合作夥伴 (首頁可見版) -->
+      <div class="partners-strip partners-strip-dark">
+        <p class="partners-label">合作夥伴 · PARTNER</p>
+        <p class="partners-intro">不知道怎麼幫孩子挑跑鞋?我們推薦——</p>
+        <div class="partners-list">
+          <a href="https://babyview.tw/" target="_blank" rel="noopener noreferrer" class="partner-card">
+            <img class="partner-logo" src="https://babyview.tw/image/catalog/LOGO/2311-topLOGO01.png" alt="布布童鞋" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <span class="partner-name-fallback" style="display:none;">布布童鞋</span>
+            <span class="partner-desc">專業童鞋顧問,為孩子挑選合腳的跑鞋</span>
+            <span class="partner-link">babyview.tw →</span>
+          </a>
         </div>
       </div>
+
+      <!-- 動態資料 fallback -->
+      <div class="schedule-list" id="schedule-list" style="display:none;"></div>
 
       <p class="schedule-footnote">
         班次資訊每日更新。<br>
@@ -348,7 +400,7 @@
         <details class="faq-item">
           <summary>孩子完全沒有運動基礎，可以參加嗎？</summary>
           <div class="faq-answer">
-            <p>完全可以。我們的「幼兒體適能」與「趣味跑步班」都是從零開始設計，第一堂課不會要求任何能力，重點是讓孩子先喜歡上動。</p>
+            <p>完全可以。我們的「幼兒跑步體適能」與「趣味跑步班」都是從零開始設計，第一堂課不會要求任何能力，重點是讓孩子先喜歡上動。</p>
           </div>
         </details>
 
@@ -363,7 +415,7 @@
           <summary>三種課程怎麼選？</summary>
           <div class="faq-answer">
             <p>簡單來說：<br>
-            <strong>幼兒體適能（4-6 歲）</strong>｜打基礎，培養運動感<br>
+            <strong>幼兒跑步體適能（4-6 歲）</strong>｜打基礎，培養運動感<br>
             <strong>趣味跑步班（6-12 歲）</strong>｜養興趣，建立習慣<br>
             <strong>跑步訓練班（6-12 歲）</strong>｜練實力，有賽事目標<br>
             不確定的話，建議從趣味跑步班開始，或直接私訊我們協助評估。</p>
@@ -380,7 +432,20 @@
         <details class="faq-item">
           <summary>下雨天怎麼辦？</summary>
           <div class="faq-answer">
-            <p>小雨會照常上課（場地有遮蔽區），大雨會在前一晚透過 LINE 通知改期或補課。</p>
+            <p>下雨天會照常上課，課程內容會依照場地狀況調整(例如改在遮蔽區進行體能或核心訓練)。<br>
+            <strong>除非政府公告停班停課</strong>(如颱風假),才會停課並擇期補課。<br>
+            如有臨時異動,我們會在當天透過 LINE 通知。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>每堂課最多幾個孩子？</summary>
+          <div class="faq-answer">
+            <p>我們刻意把人數壓低,讓每個孩子都能被教練看見：<br>
+            <strong>幼兒跑步體適能班(4-6 歲)</strong>｜最多 6 人<br>
+            <strong>兒童趣味跑步班(6-12 歲)</strong>｜最多 10 人<br>
+            <strong>兒童跑步訓練班(6-12 歲)</strong>｜最多 20 人(2 位教練協同帶班)<br>
+            滿班後新名額需等下一期。</p>
           </div>
         </details>
 
