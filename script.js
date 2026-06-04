@@ -86,6 +86,10 @@ function renderCourses(courses) {
 function renderSchedule(rows) {
   if (!rows || !rows.length) return;
 
+  // 過濾掉體驗班次（location 以 [體驗] 開頭），首頁正課班次區不顯示
+  rows = rows.filter(r => !String(r.location || "").trim().startsWith("[體驗]"));
+  if (!rows.length) return;
+
   // 按 course 分組
   const grouped = {};
   rows.forEach(r => {
@@ -368,3 +372,12 @@ document.addEventListener("DOMContentLoaded", () => {
   initScrollReveal();
   initData();
 });
+
+/* ---------- 體驗課入口：6/13 後自動隱藏 ---------- */
+(function hideTrialBtnAfterDeadline() {
+  const TRIAL_DEADLINE = new Date("2026-06-13T23:59:59+08:00");
+  if (new Date() > TRIAL_DEADLINE) {
+    const btn = document.getElementById("trial-hero-btn");
+    if (btn) btn.style.display = "none";
+  }
+})();
