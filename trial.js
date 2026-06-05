@@ -3,11 +3,11 @@
    ============================ */
 
 /* === 設定區 === */
-const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwhPdydy5oWO6DPufyJVqzBnP5cZMAfqhzCII70vFx0_hI4GPp93Rwk4-FmWwOHgo0Y/exec";
+const GAS_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxteEJmDZ2w8j4xRcTE87kloH9Fm7jtaFm3PKH-oX5WIfuVClvPfKqdfaktaqOdXgKL/exec";
 
-/* 體驗報名截止時間：6/13 當天最後一班（10:00 趣味班）結束後關閉。
-   設為 2026/6/13 23:59:59，過了就顯示「已截止」並導私訊。 */
-const TRIAL_DEADLINE = new Date("2026-06-13T23:59:59+08:00");
+/* 體驗報名各課各自截止（由每個 option 的 data-deadline 決定）。
+   最晚截止日（趣味/訓練 6/27）= 全部結束的判斷點。 */
+const TRIAL_FINAL_DEADLINE = new Date("2026-06-27T23:59:59+08:00");
 
 /* === DOM === */
 const form = document.getElementById("trial-form");
@@ -19,10 +19,26 @@ const courseSelect = document.getElementById("course");
 const priceDisplay = document.getElementById("price-display");
 const displayTotal = document.getElementById("display-total");
 
-/* === 截止判斷：過期就只顯示「已截止」區 === */
-(function checkDeadline() {
+/* === 截止判斷 ===
+   1) 移除已過各自截止日的班次選項（option）
+   2) 若某 optgroup 底下選項全沒了，連 optgroup 一起移除
+   3) 若全部班次都過期，顯示「已截止」整頁並導私訊 */
+(function checkDeadlines() {
   const now = new Date();
-  if (now > TRIAL_DEADLINE) {
+
+  if (courseSelect) {
+    courseSelect.querySelectorAll("option[data-deadline]").forEach(opt => {
+      const dl = new Date(opt.dataset.deadline);
+      if (now > dl) opt.remove();
+    });
+    // 清掉空的 optgroup
+    courseSelect.querySelectorAll("optgroup").forEach(g => {
+      if (!g.querySelector("option")) g.remove();
+    });
+  }
+
+  // 全部過期 → 顯示截止頁
+  if (now > TRIAL_FINAL_DEADLINE) {
     if (formSection) formSection.style.display = "none";
     if (successSection) successSection.style.display = "none";
     if (closedSection) closedSection.style.display = "block";
@@ -70,11 +86,10 @@ if (form) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    /* 送出前再擋一次截止（防止使用者開著頁面過了午夜才送） */
-    if (new Date() > TRIAL_DEADLINE) {
-      if (formSection) formSection.style.display = "none";
-      if (closedSection) closedSection.style.display = "block";
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    /* 送出前再擋一次截止（防止使用者開著頁面過了該班截止才送） */
+    const selOpt = courseSelect.options[courseSelect.selectedIndex];
+    if (selOpt && selOpt.dataset.deadline && new Date() > new Date(selOpt.dataset.deadline)) {
+      showError("這個體驗班次的報名已截止，請改選其他班次，或透過 LINE 私訊小編詢問。");
       return;
     }
 

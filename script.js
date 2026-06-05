@@ -377,7 +377,8 @@ document.addEventListener("DOMContentLoaded", () => {
 (function hideTrialBtnAfterDeadline() {
   const TRIAL_DEADLINE = new Date("2026-06-13T23:59:59+08:00");
   if (new Date() > TRIAL_DEADLINE) {
-    const btn = document.getElementById("trial-hero-btn");
-    if (btn) btn.style.display = "none";
+    document.querySelectorAll(".trial-btn, .trial-banner").forEach(el => {
+      el.style.display = "none";
+    });
   }
 })();
