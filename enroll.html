@@ -224,7 +224,7 @@
                 <input type="checkbox" id="agree" name="agree" required>
                 <span class="checkbox-mark"></span>
                 <span class="checkbox-text">
-                  我已閱讀並同意 <a href="terms.html" target="_blank" rel="noopener" class="consent-link">服務條款與免責聲明</a> <span class="required">*</span>
+                  我已閱讀並同意 <a href="#" class="consent-link" id="open-terms">服務條款與免責聲明</a> <span class="required">*</span>
                   <span class="consent-detail">
                     包含活動風險、肖像授權、退費制度、補課制度等。<br>
                     點擊連結會在新分頁開啟,看完不會清空你已經填寫的內容。
@@ -325,6 +325,52 @@
       </div>
     </section>
   </main>
+
+  <!-- ============= 服務條款 Modal ============= -->
+  <div class="terms-modal-overlay" id="terms-modal" aria-hidden="true">
+    <div class="terms-modal" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+      <div class="terms-modal-head">
+        <h2 id="terms-modal-title">服務條款與免責聲明</h2>
+        <button type="button" class="terms-modal-close" id="close-terms" aria-label="關閉">&times;</button>
+      </div>
+      <div class="terms-modal-body">
+        <p class="tm-item"><strong>01 活動風險聲明</strong>　參與本課程即同意承擔運動可能發生之風險（推擠、碰撞、翻滾等可能造成人身或財產損失）。</p>
+        <p class="tm-item"><strong>02 活動規定與自我管理</strong>　請遵守活動規定並配合工作人員指示；違反者主辦單位有權禁止參與，且無須負損害賠償責任。</p>
+        <p class="tm-item"><strong>03 保險聲明</strong>　本課程不含保險，如需個人保險請自行加保。</p>
+        <p class="tm-item"><strong>04 肖像授權</strong>　同意授權 NID For Kids 拍攝、使用課程中的肖像、名字、聲音於各形式媒體與印刷品。<br><span class="tm-note">💡 若不希望被使用，請於報名「身體狀況」欄備註，或上課前告知教練。</span></p>
+        <p class="tm-item"><strong>05 健康狀況聲明</strong>　聲明孩子健康狀況良好、適合參加本活動；活動中如發生意外願自行負責。</p>
+        <p class="tm-item"><strong>06 主辦單位權利</strong>　主辦單位保有修改、變更或暫停活動之權利，未盡事宜依主辦單位規定辦理。</p>
+        <p class="tm-item"><strong>07 停課與寄物</strong>　除政府發布停班停課外，雨天仍正常上課；不可抗力停課將由教練與家長溝通補課。颱風假該堂順延一週（招生月遇颱風假則單堂全額退費）。寄物不負保管責任，請勿攜帶貴重物品。</p>
+        <p class="tm-item"><strong>08 名額轉讓限制</strong>　名額不得轉讓他人，違者取消報名資格。</p>
+        <p class="tm-item"><strong>09 退費制度</strong>　報名後 3 天審閱期內可全額退費；其後依已上課堂數與規定辦理。</p>
+        <p class="tm-item"><strong>10 補課制度</strong>　需事先請假方可補課（當日無故缺席不予補課退費）；補課須於該班最後一堂課前完成，每期上限 6 堂。</p>
+        <p class="tm-item"><strong>11 視為同意</strong>　完成報名並繳費，即視為已詳閱並同意本條款全部內容。</p>
+        <p class="tm-item"><strong>12 修訂權利</strong>　本單位保有條款修訂權利，修訂後公告於官方管道。</p>
+        <p class="tm-fulllink"><a href="terms.html" target="_blank" rel="noopener">開啟完整條款頁面 →</a></p>
+      </div>
+      <div class="terms-modal-foot">
+        <button type="button" class="btn btn-yellow" id="agree-and-close">我已閱讀，關閉並繼續</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .terms-modal-overlay{position:fixed;inset:0;background:rgba(10,10,10,.6);display:none;align-items:center;justify-content:center;z-index:9999;padding:1rem;}
+    .terms-modal-overlay.open{display:flex;}
+    .terms-modal{background:#fff;border-radius:16px;max-width:640px;width:100%;max-height:85vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.3);}
+    .terms-modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid #ececec;flex-shrink:0;}
+    .terms-modal-head h2{margin:0;font-size:1.2rem;font-family:var(--serif,serif);}
+    .terms-modal-close{background:none;border:none;font-size:1.8rem;line-height:1;cursor:pointer;color:#767676;padding:0 .25rem;}
+    .terms-modal-close:hover{color:#0a0a0a;}
+    .terms-modal-body{padding:1.25rem 1.5rem;overflow-y:auto;flex:1;}
+    .tm-item{font-size:.92rem;line-height:1.75;color:#4a4a4a;margin:0 0 .9rem;}
+    .tm-item strong{color:#0a0a0a;}
+    .tm-note{color:#767676;font-size:.85rem;}
+    .tm-fulllink{margin-top:1rem;font-size:.9rem;}
+    .tm-fulllink a{color:#0a0a0a;text-decoration:underline;}
+    .terms-modal-foot{padding:1rem 1.5rem;border-top:1px solid #ececec;text-align:center;flex-shrink:0;}
+  </style>
+
 
   <!-- ============= FOOTER ============= -->
   <footer class="footer">

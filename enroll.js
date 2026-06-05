@@ -183,3 +183,41 @@ function showSuccess(data) {
   successSection.style.display = "block";
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+
+/* ---------- 服務條款 Modal 開關 ---------- */
+(function initTermsModal() {
+  const openLink = document.getElementById("open-terms");
+  const modal = document.getElementById("terms-modal");
+  const closeBtn = document.getElementById("close-terms");
+  const agreeBtn = document.getElementById("agree-and-close");
+  const agreeCheckbox = document.getElementById("agree");
+  if (!openLink || !modal) return;
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+  function closeModal() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  openLink.addEventListener("click", openModal);
+  if (closeBtn) closeBtn.addEventListener("click", closeModal);
+  // 「我已閱讀，關閉並繼續」順便勾選同意
+  if (agreeBtn) agreeBtn.addEventListener("click", () => {
+    if (agreeCheckbox) agreeCheckbox.checked = true;
+    closeModal();
+  });
+  // 點背景關閉
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  // Esc 關閉
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("open")) closeModal();
+  });
+})();
