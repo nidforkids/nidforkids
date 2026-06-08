@@ -63,9 +63,9 @@ function saveEnrollment(data) {
       "孩子姓名", "孩子年齡", "性別", "學校",
       "運動習慣", "身體狀況", "課程目標",
       "家長姓名", "與孩子關係", "手機", "Email", "認識管道",
-      "付款狀態", "備註"
+      "匯款後五碼", "付款狀態", "備註"
     ]);
-    sheet.getRange(1, 1, 1, 21)
+    sheet.getRange(1, 1, 1, 22)
       .setBackground("#0a0a0a")
       .setFontColor("#F5C518")
       .setFontWeight("bold");
@@ -92,14 +92,61 @@ function saveEnrollment(data) {
     data.parent_phone || "",
     data.parent_email || "",
     data.source || "",
+    data.payment_last5 || "",
     "待匯款",
     ""
   ]);
+
+  // 為剛新增的這一列套上「付款狀態」下拉選單
+  applyStatusValidationToRow(sheet, sheet.getLastRow());
+}
+
+/* 付款狀態的所有可選值 */
+const PAYMENT_STATUSES = ["待匯款", "已付款", "已取消", "已釋出", "未付款已釋出"];
+
+/* 對指定列的「付款狀態」欄套用下拉選單驗證 */
+function applyStatusValidationToRow(sheet, rowNum) {
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const statusCol = headers.indexOf("付款狀態") + 1;
+  if (statusCol === 0 || rowNum < 2) return;
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(PAYMENT_STATUSES, true)
+    .setAllowInvalid(false)
+    .build();
+  sheet.getRange(rowNum, statusCol).setDataValidation(rule);
+}
+
+/* 一鍵：把付款狀態下拉套用到 enrollments 現有所有資料列（手動執行用） */
+function applyStatusDropdown() {
+  const ss = getSpreadsheet();
+  const sheet = ss.getSheetByName("enrollments");
+  if (!sheet) {
+    console.log("找不到 enrollments 分頁");
+    return;
+  }
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) {
+    console.log("目前沒有報名資料列，未來新增的報名會自動帶下拉選單。");
+    return;
+  }
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  const statusCol = headers.indexOf("付款狀態") + 1;
+  if (statusCol === 0) {
+    console.log("找不到「付款狀態」欄");
+    return;
+  }
+  const rule = SpreadsheetApp.newDataValidation()
+    .requireValueInList(PAYMENT_STATUSES, true)
+    .setAllowInvalid(false)
+    .build();
+  sheet.getRange(2, statusCol, lastRow - 1, 1).setDataValidation(rule);
+  console.log("✅ 已為 " + (lastRow - 1) + " 列套上付款狀態下拉選單");
 }
 
 
-function updateScheduleEnrolled(courseStr) {
+function updateScheduleEnrolled(courseStr, delta) {
   if (!courseStr) return;
+  if (delta === undefined) delta = 1;
   const parts = courseStr.split("|").map(s => s.trim());
   if (parts.length < 3) return;
 
@@ -132,7 +179,9 @@ function updateScheduleEnrolled(courseStr) {
       String(row[idxCourse]).trim() === courseName
     ) {
       const current = Number(row[idxEnrolled]) || 0;
-      sheet.getRange(i + 1, idxEnrolled + 1).setValue(current + 1);
+      let next = current + delta;
+      if (next < 0) next = 0;  // 不會減到負數
+      sheet.getRange(i + 1, idxEnrolled + 1).setValue(next);
       break;
     }
   }
@@ -341,6 +390,90 @@ function setupSheets() {
   console.log("🎉 全部設定完成!");
 }
 
+/* 一鍵：把現有 enrollments 表頭升級成含「匯款後五碼」欄（手動執行一次） */
+function migrateEnrollmentsHeader() {
+  const ss = getSpreadsheet();
+  const sheet = ss.getSheetByName("enrollments");
+  if (!sheet) {
+    console.log("找不到 enrollments，下次有報名時會自動以新格式建立。");
+    return;
+  }
+  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  if (headers.indexOf("匯款後五碼") !== -1) {
+    console.log("已經有「匯款後五碼」欄，無需升級。");
+    return;
+  }
+  // 在「認識管道」之後插入一欄
+  let insertAfter = headers.indexOf("認識管道") + 1;  // 1-based
+  if (insertAfter === 0) insertAfter = headers.indexOf("付款狀態"); // 退而求其次：放付款狀態前
+  sheet.insertColumnAfter(insertAfter);
+  sheet.getRange(1, insertAfter + 1)
+    .setValue("匯款後五碼")
+    .setBackground("#0a0a0a")
+    .setFontColor("#F5C518")
+    .setFontWeight("bold");
+  console.log("✅ 已新增「匯款後五碼」欄。現有報名該欄為空，新報名會自動填入。");
+}
+
 function getSpreadsheet() {
   return SpreadsheetApp.openById("1jCcnpZRiw3bZsfKOvr50AOxhsh1fdExx0kfCaHPB4t4");
+}
+
+
+/**
+ * ============================================
+ * 自動釋出名額：當 enrollments 的「付款狀態」
+ * 改成「已取消 / 已釋出 / 未付款已釋出」時，
+ * 自動把 schedule 對應班次的 enrolled −1
+ * ============================================
+ *
+ * 安裝方式：在編輯器執行一次 installTriggers()
+ */
+
+const RELEASE_STATUSES = ["已取消", "已釋出", "未付款已釋出"];
+
+function installTriggers() {
+  // 先刪掉舊的同名觸發器，避免重複
+  const triggers = ScriptApp.getProjectTriggers();
+  for (const t of triggers) {
+    if (t.getHandlerFunction() === "onEditInstallable") {
+      ScriptApp.deleteTrigger(t);
+    }
+  }
+  // 安裝可程式化的 onEdit 觸發器（綁定到這份 Sheets）
+  ScriptApp.newTrigger("onEditInstallable")
+    .forSpreadsheet(getSpreadsheet())
+    .onEdit()
+    .create();
+  console.log("✅ 觸發器安裝完成。日後將付款狀態改為「已取消 / 已釋出 / 未付款已釋出」會自動釋出名額。");
+}
+
+function onEditInstallable(e) {
+  try {
+    if (!e || !e.range) return;
+    const sheet = e.range.getSheet();
+    if (sheet.getName() !== "enrollments") return;
+
+    const editedRow = e.range.getRow();
+    const editedCol = e.range.getColumn();
+    if (editedRow === 1) return;  // 表頭不處理
+
+    // 找出「付款狀態」與「課程班次」欄位位置
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+    const statusCol = headers.indexOf("付款狀態") + 1;
+    const courseCol = headers.indexOf("課程班次") + 1;
+    if (statusCol === 0 || courseCol === 0) return;
+
+    // 只在編輯到「付款狀態」那一欄時才處理
+    if (editedCol !== statusCol) return;
+
+    const newStatus = String(e.range.getValue()).trim();
+    if (RELEASE_STATUSES.indexOf(newStatus) === -1) return;
+
+    // 取該列的課程班次字串，做 −1
+    const courseStr = sheet.getRange(editedRow, courseCol).getValue();
+    updateScheduleEnrolled(courseStr, -1);
+  } catch (err) {
+    console.error("onEditInstallable error: " + err);
+  }
 }

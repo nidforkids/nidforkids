@@ -641,6 +641,14 @@
     gap: 1.25rem;
   }
 
+  /* 手機改回原生下拉外觀，避免 in-app 瀏覽器點不開的問題 */
+  .form-select {
+    appearance: auto;
+    -webkit-appearance: auto;
+    background-image: none;
+    padding-right: 1rem;
+  }
+
   .payment-info {
     padding: 1.75rem;
   }

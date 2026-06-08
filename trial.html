@@ -246,6 +246,29 @@
             </div>
           </div>
 
+          <!-- ========== 匯款資訊與回報 ========== -->
+          <div class="form-section">
+            <div class="form-section-head">
+              <span class="form-section-num">$</span>
+              <h2>完成匯款並填寫後五碼</h2>
+            </div>
+
+            <div style="background:var(--gray-100);border-radius:12px;padding:1.1rem 1.25rem;margin-bottom:1.25rem;line-height:1.9;">
+              <p style="font-weight:700;margin-bottom:0.5rem;">請先完成體驗課匯款（單堂 NT$250），再填寫帳號後五碼送出：</p>
+              <p style="font-size:0.95rem;color:var(--gray-700);">
+                戶名：恩艾迪有限公司<br>
+                銀行：富邦銀行（012）東湖分行<br>
+                帳號：<strong>686102009800</strong>
+              </p>
+            </div>
+
+            <div class="form-row">
+              <label class="form-label" for="payment_last5">匯款帳號後 5 碼 <span class="required">*</span></label>
+              <input type="text" id="payment_last5" name="payment_last5" required class="form-input" placeholder="例如：12345" pattern="[0-9]{5}" maxlength="5" inputmode="numeric">
+              <p class="form-hint">請填寫您匯款的<strong>轉出帳號末 5 碼</strong>，方便我們核對款項。完成匯款後即可填寫。</p>
+            </div>
+          </div>
+
           <!-- ========== 同意條款 ========== -->
           <div class="form-section">
             <div class="form-consent">
@@ -268,8 +291,8 @@
             </button>
 
             <p class="form-disclaimer">
-              送出後系統會自動寄送匯款資訊到您的 Email，<br>
-              請於 24 小時內完成匯款並至 LINE 官方帳號回報後 5 碼。
+              送出後系統會寄送確認信到您的 Email。<br>
+              我們核對到您的款項後，會透過 LINE 通知報名成功。
             </p>
           </div>
 
