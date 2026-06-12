@@ -208,6 +208,10 @@ function showError(msg) {
 }
 
 function showSuccess(data) {
+  const noteEl = document.getElementById("payment-note");
+  if (noteEl && data.child_name) {
+    noteEl.textContent = data.child_name;
+  }
   const amountEl = document.getElementById("payment-amount");
   if (amountEl && data.total_amount) {
     const total = Number(data.total_amount);

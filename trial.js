@@ -168,7 +168,7 @@ if (form) {
       } else {
         await new Promise(r => setTimeout(r, 800));
       }
-      showSuccess();
+      showSuccess(data);
       if (typeof fbq === "function") {
         fbq("track", "SubmitApplication", {
           content_name: data.course || "",
@@ -194,7 +194,11 @@ function showError(msg) {
   err.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
-function showSuccess() {
+function showSuccess(data) {
+  const noteEl = document.getElementById("payment-note");
+  if (noteEl && data && data.child_name) {
+    noteEl.textContent = data.child_name;
+  }
   formSection.style.display = "none";
   successSection.style.display = "block";
   window.scrollTo({ top: 0, behavior: "smooth" });
