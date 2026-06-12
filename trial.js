@@ -111,6 +111,43 @@ if (form) {
       data.is_early_bird = "否";
     }
 
+    /* === 送出前必填驗證（因表單有 novalidate，需自行檢查） === */
+    const required = [
+      ["course", "請選擇體驗班次"],
+      ["child_name", "請填寫孩子姓名"],
+      ["child_age", "請填寫孩子年齡"],
+      ["activity_level", "請選擇孩子的運動習慣"],
+      ["parent_name", "請填寫家長姓名"],
+      ["parent_relation", "請填寫與孩子的關係"],
+      ["parent_phone", "請填寫聯絡電話"],
+      ["parent_email", "請填寫 Email"],
+      ["payment_last5", "請填寫匯款帳號後五碼"],
+    ];
+    for (const [key, msg] of required) {
+      if (!data[key] || String(data[key]).trim() === "") {
+        showError(msg + "。");
+        const el = form.querySelector('[name="' + key + '"]');
+        if (el) el.focus();
+        return;
+      }
+    }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(data.parent_email)) {
+      showError("Email 格式看起來不正確，請再確認一次。");
+      return;
+    }
+    if (String(data.parent_phone).replace(/\D/g, "").length < 8) {
+      showError("聯絡電話格式看起來不正確，請再確認一次。");
+      return;
+    }
+    if (!/^\d{5}$/.test(String(data.payment_last5).trim())) {
+      showError("匯款帳號後五碼需為 5 位數字。");
+      return;
+    }
+    if (!data.price_per_class || !data.total_classes) {
+      showError("課程資料未正確帶入，請重新選擇。");
+      return;
+    }
+
     if (!data.agree) {
       showError("請勾選同意條款後再送出。");
       return;
@@ -132,6 +169,13 @@ if (form) {
         await new Promise(r => setTimeout(r, 800));
       }
       showSuccess();
+      if (typeof fbq === "function") {
+        fbq("track", "SubmitApplication", {
+          content_name: data.course || "",
+          value: Number(data.total_amount) || 0,
+          currency: "TWD",
+        });
+      }
     } catch (err) {
       console.error(err);
       showError("送出時發生錯誤，請稍後再試，或透過 LINE 直接聯繫我們。");

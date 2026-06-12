@@ -3,6 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2077997892264778');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2077997892264778&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
   <meta name="description" content="NID For Kids 填寫報名表｜兒童體適能與跑步課程報名。">
   <title>填寫報名表｜NID For Kids</title>
 
@@ -126,8 +144,8 @@
               </div>
 
               <div class="form-row">
-                <label class="form-label" for="child_gender">性別</label>
-                <select id="child_gender" name="child_gender" class="form-select">
+                <label class="form-label" for="child_gender">性別 <span class="required">*</span></label>
+                <select id="child_gender" name="child_gender" required class="form-select">
                   <option value="">— 請選擇 —</option>
                   <option value="男">男生</option>
                   <option value="女">女生</option>
@@ -136,8 +154,8 @@
               </div>
 
               <div class="form-row">
-                <label class="form-label" for="child_school">就讀學校或幼兒園</label>
-                <input type="text" id="child_school" name="child_school" class="form-input" placeholder="可選填">
+                <label class="form-label" for="child_school">就讀學校或幼兒園 <span class="required">*</span></label>
+                <input type="text" id="child_school" name="child_school" required class="form-input" placeholder="例如：OO國小、OO幼兒園">
               </div>
             </div>
 
@@ -161,8 +179,8 @@
             </div>
 
             <div class="form-row">
-              <label class="form-label" for="goal">課程目標或期待</label>
-              <textarea id="goal" name="goal" class="form-textarea" rows="3" placeholder="例如：希望孩子能愛上運動、想為某場比賽備戰、想改善體力等。"></textarea>
+              <label class="form-label" for="goal">課程目標或期待 <span class="required">*</span></label>
+              <textarea id="goal" name="goal" required class="form-textarea" rows="3" placeholder="例如：希望孩子能愛上運動、想為某場比賽備戰、想改善體力等。"></textarea>
             </div>
           </div>
 
@@ -204,13 +222,14 @@
             </div>
 
             <div class="form-row">
-              <label class="form-label" for="source">您從哪裡知道我們的？</label>
-              <select id="source" name="source" class="form-select">
-                <option value="">— 請選擇（選填）—</option>
+              <label class="form-label" for="source">您從哪裡知道我們的？ <span class="required">*</span></label>
+              <select id="source" name="source" required class="form-select">
+                <option value="">— 請選擇 —</option>
                 <option value="Instagram">Instagram</option>
                 <option value="Facebook">Facebook</option>
                 <option value="朋友介紹">朋友介紹</option>
                 <option value="NID Run Club">NID Run Club</option>
+                <option value="布布童鞋">布布童鞋</option>
                 <option value="Google 搜尋">Google 搜尋</option>
                 <option value="其他">其他</option>
               </select>
