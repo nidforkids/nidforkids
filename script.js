@@ -373,9 +373,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initData();
 });
 
-/* ---------- 體驗課入口：6/13 後自動隱藏 ---------- */
+/* ---------- 體驗課入口：6/27 後自動隱藏（第二波體驗） ---------- */
 (function hideTrialBtnAfterDeadline() {
-  const TRIAL_DEADLINE = new Date("2026-06-13T23:59:59+08:00");
+  const TRIAL_DEADLINE = new Date("2026-06-27T23:59:59+08:00");
   if (new Date() > TRIAL_DEADLINE) {
     document.querySelectorAll(".trial-btn, .trial-banner").forEach(el => {
       el.style.display = "none";
