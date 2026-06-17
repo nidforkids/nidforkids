@@ -164,6 +164,14 @@ if (form) {
       return;
     }
 
+    if (typeof fbq === "function") {
+      fbq("track", "InitiateCheckout", {
+        content_name: data.course || "",
+        value: Number(data.total_amount) || 0,
+        currency: "TWD",
+      });
+    }
+
     submitBtn.classList.add("loading");
     submitBtn.disabled = true;
     submitBtn.querySelector(".btn-arrow").textContent = "";
@@ -184,6 +192,11 @@ if (form) {
       showSuccess(data);
       if (typeof fbq === "function") {
         fbq("track", "SubmitApplication", {
+          content_name: data.course || "",
+          value: Number(data.total_amount) || 0,
+          currency: "TWD",
+        });
+        fbq("track", "Purchase", {
           content_name: data.course || "",
           value: Number(data.total_amount) || 0,
           currency: "TWD",
