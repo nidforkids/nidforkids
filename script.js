@@ -134,20 +134,8 @@ function renderSchedule(rows) {
       const enrolled = Number(c.enrolled) || 0;
       const remaining = Math.max(capacity - enrolled, 0);
 
-      let spotsText = `剩 ${remaining} / ${capacity} 位`;
-      let cta;
-      if (remaining <= 0 || (c.status || "").includes("額滿")) {
-        spotsText = "額滿";
-        cta = `<span class="sr-cta" style="background:#666;cursor:not-allowed;">候補</span>`;
-      } else {
-        const params = new URLSearchParams({
-          course: c.course || "",
-          loc: c.location || "",
-          day: c.day || "",
-          time: c.time || "",
-        });
-        cta = `<a class="sr-cta" href="enroll.html?${params.toString()}">報名</a>`;
-      }
+      let spotsText = "";
+      let cta = `<a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>`;
 
       return `
         <li class="schedule-row" data-course="${c.course}" data-loc="${c.location}" data-day="${c.day}" data-time="${c.time}">
@@ -168,15 +156,8 @@ function renderSchedule(rows) {
     if (priceBlock && classes.length > 0) {
       const sample = classes[0];
       const price = Number(sample.price) || 450;
-      const totalClasses = Number(sample.total_classes) || 12;
-      const earlyBirdPrice = Number(sample.early_bird_price) || 0;
-      const discountNote = sample.discount_note || "";
 
-      let priceHtml = `NT$ ${price}/堂 × ${totalClasses} 堂`;
-      if (earlyBirdPrice > 0) {
-        const tagText = discountNote || `早鳥 NT$ ${earlyBirdPrice}/堂`;
-        priceHtml += ` 　<span class="early-bird-tag">🏷 ${tagText} NT$ ${earlyBirdPrice}/堂</span>`;
-      }
+      let priceHtml = `單堂 NT$ ${price}・可插班`;
       priceBlock.innerHTML = priceHtml;
     }
   });
@@ -231,39 +212,15 @@ function renderScheduleLegacy(rows) {
       const effectivePrice = isEarlyBird ? earlyBirdPrice : price;
       const totalAmount = effectivePrice * totalClasses;
 
-      // 名額顯示
+      // 名額顯示（已隱藏）
       let spotsClass = "";
-      let spotsText = `剩 ${remaining} / ${capacity} 位`;
-      let enrollBtn = "";
+      let spotsText = "";
+      let enrollBtn = `<a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" class="class-enroll">私訊插班</a>`;
 
-      if (remaining <= 0 || (c.status || "").includes("額滿")) {
-        spotsClass = "full";
-        spotsText = "額滿";
-        enrollBtn = `<a class="class-enroll disabled">候補登記</a>`;
-      } else {
-        if (remaining <= 2) spotsClass = "few";
-        const params = new URLSearchParams({
-          course: c.course || "",
-          loc: loc,
-          day: c.day || "",
-          time: c.time || "",
-        });
-        enrollBtn = `<a href="enroll.html?${params.toString()}" class="class-enroll">立即報名</a>`;
-      }
-
-      // 價格顯示區塊
+      // 價格顯示區塊：單堂 450，可插班
       let priceHtml = "";
       if (price > 0) {
-        if (isEarlyBird) {
-          priceHtml = `
-            <div class="class-price has-discount">
-              <span class="price-original">NT$ ${price}/堂</span>
-              <span class="price-current">早鳥 NT$ ${earlyBirdPrice}/堂</span>
-            </div>
-          `;
-        } else {
-          priceHtml = `<div class="class-price"><span class="price-current">NT$ ${price}/堂</span>${totalClasses ? ` <span class="price-note">× ${totalClasses} 堂</span>` : ''}</div>`;
-        }
+        priceHtml = `<div class="class-price"><span class="price-current">單堂 NT$ ${price}</span> <span class="price-note">・可插班</span></div>`;
       }
 
       return `
@@ -373,9 +330,9 @@ document.addEventListener("DOMContentLoaded", () => {
   initData();
 });
 
-/* ---------- 體驗課入口：6/27 後自動隱藏（第二波體驗） ---------- */
+/* ---------- 體驗課入口：6/13 後自動隱藏 ---------- */
 (function hideTrialBtnAfterDeadline() {
-  const TRIAL_DEADLINE = new Date("2026-06-27T23:59:59+08:00");
+  const TRIAL_DEADLINE = new Date("2026-06-13T23:59:59+08:00");
   if (new Date() > TRIAL_DEADLINE) {
     document.querySelectorAll(".trial-btn, .trial-banner").forEach(el => {
       el.style.display = "none";
