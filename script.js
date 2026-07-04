@@ -157,7 +157,7 @@ function renderSchedule(rows) {
       const sample = classes[0];
       const price = Number(sample.price) || 450;
 
-      let priceHtml = `單堂 NT$ ${price}・可插班`;
+      let priceHtml = `整期 NT$ 4,050（可補課）／ 單堂 NT$ 500 ／ 插班私訊小編`;
       priceBlock.innerHTML = priceHtml;
     }
   });
@@ -198,29 +198,17 @@ function renderScheduleLegacy(rows) {
       const enrolled = Number(c.enrolled) || 0;
       const remaining = Math.max(capacity - enrolled, 0);
 
-      // 價格計算：判斷早鳥是否還有效
       const price = Number(c.price) || 0;
-      const totalClasses = Number(c.total_classes) || 0;
-      const earlyBirdPrice = Number(c.early_bird_price) || 0;
-      const earlyBirdUntil = c.early_bird_until ? new Date(c.early_bird_until) : null;
-
-      let isEarlyBird = false;
-      if (earlyBirdPrice > 0 && earlyBirdUntil && earlyBirdUntil > new Date()) {
-        isEarlyBird = true;
-      }
-
-      const effectivePrice = isEarlyBird ? earlyBirdPrice : price;
-      const totalAmount = effectivePrice * totalClasses;
 
       // 名額顯示（已隱藏）
       let spotsClass = "";
       let spotsText = "";
       let enrollBtn = `<a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" class="class-enroll">私訊插班</a>`;
 
-      // 價格顯示區塊：單堂 450，可插班
+      // 價格顯示區塊：整期 4050 / 單堂 500 / 插班私訊
       let priceHtml = "";
       if (price > 0) {
-        priceHtml = `<div class="class-price"><span class="price-current">單堂 NT$ ${price}</span> <span class="price-note">・可插班</span></div>`;
+        priceHtml = `<div class="class-price"><span class="price-current">整期 NT$ 4,050</span> <span class="price-note">／ 單堂 NT$ 500 ／ 插班私訊</span></div>`;
       }
 
       return `

@@ -541,27 +541,13 @@
 }
 
 /* ============================
-   PRICE info-card 早鳥版
+   PRICE info-card
    ============================ */
 
 .info-card-price {
   background: linear-gradient(135deg, rgba(245, 197, 24, 0.08), rgba(245, 197, 24, 0.02));
   border-color: rgba(245, 197, 24, 0.35) !important;
   position: relative;
-}
-
-.info-card-price::before {
-  content: "🏷 早鳥";
-  position: absolute;
-  top: -8px;
-  right: 12px;
-  background: var(--yellow);
-  color: var(--black);
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.18rem 0.55rem;
-  border-radius: 3px;
-  letter-spacing: 0.03em;
 }
 
 .price-original-strike {
