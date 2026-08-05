@@ -115,7 +115,7 @@ a {
 }
 
 .nav-logo-img {
-  height: 36px;
+  height: 26px;
   width: auto;
   display: block;
 }
@@ -1715,9 +1715,9 @@ a {
 
 .perks-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  max-width: 860px;
+  max-width: 1040px;
   margin: 1.5rem auto 0;
 }
 
