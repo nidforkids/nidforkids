@@ -1692,6 +1692,81 @@ a {
   letter-spacing: 0.05em;
 }
 
+/* ===== 學員福利 MEMBER PERKS ===== */
+.perks-strip {
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: center;
+}
+
+.perks-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  max-width: 860px;
+  margin: 1.5rem auto 0;
+}
+
+.perk-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 2rem 2rem 1.75rem;
+  text-align: left;
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.perk-card:hover {
+  background: rgba(245, 197, 24, 0.08);
+  border-color: var(--yellow);
+  box-shadow: 0 8px 24px rgba(245, 197, 24, 0.1);
+  transform: translateY(-2px);
+}
+
+.perk-icon {
+  display: inline-block;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+.perk-name {
+  color: var(--white);
+  font-size: 1.3rem;
+  font-family: var(--serif);
+  margin: 0 0 0.6rem;
+}
+
+.perk-desc {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin: 0 0 1rem;
+}
+
+.perk-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--black);
+  background: var(--yellow);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .perks-list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .perk-card {
+    padding: 1.6rem 1.5rem;
+  }
+}
+
 /* Mobile */
 @media (max-width: 720px) {
   .schedule-period {

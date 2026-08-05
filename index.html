@@ -139,8 +139,8 @@
 
       <!-- 體驗課 CTA 橫幅（6/13 後由 script.js 自動隱藏） -->
       <div class="trial-banner" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1rem;margin:2rem auto 0;padding:1.25rem 1.5rem;max-width:680px;background:var(--black);border-radius:14px;text-align:center;">
-        <span style="color:#fff;font-size:1rem;line-height:1.6;">🏃 課程開班中｜整期 NT$4,050・單堂 NT$500｜<strong style="color:var(--yellow);">插班私訊小編</strong></span>
-        <a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" class="btn btn-yellow" style="white-space:nowrap;">私訊小編報名</a>
+        <span style="color:#fff;font-size:1rem;line-height:1.6;">🏃 台北田徑場・9 月開課｜週四 12 堂 NT$5,400・週五 10 堂 NT$4,500・週六 9 堂 NT$4,050｜<strong style="color:var(--yellow);">一堂 NT$450</strong></span>
+        <a href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener" class="btn btn-yellow enroll-cta" style="white-space:nowrap;">馬上報名</a>
       </div>
 
       <!-- Course list will be loaded from Sheets, with fallback static content -->
@@ -228,24 +228,24 @@
         <span class="yellow">班次。</span>
       </h2>
 
-      <p class="section-lead light">選擇你想看的課程,展開所有班次。<br>不確定哪個適合？<a href="#contact" class="inline-link">私訊我們協助評估</a>。</p>
+      <p class="section-lead light">全部班次都在台北田徑場，依星期挑選最方便的時段。<br>不確定哪個適合？<a href="#contact" class="inline-link">私訊我們協助評估</a>。</p>
 
       <!-- 期程資訊 -->
       <p class="schedule-period">
-        <span class="period-badge">2026 夏季班</span>
-        <span class="period-text">7/1 — 8/30 ｜ 一期共 9 堂</span>
+        <span class="period-badge">2026 秋季班</span>
+        <span class="period-text">台北田徑場 ｜ 9 月開課</span>
       </p>
 
-      <!-- 課程卡片(預設展開第一張) -->
+      <!-- 班次卡片：按星期分（預設展開第一張） -->
       <div class="course-tabs" id="course-tabs">
 
-        <!-- 卡片 1: 幼兒跑步體適能班 -->
-        <div class="course-tab is-open" data-course="fitness">
+        <!-- 卡片 1: 週四 -->
+        <div class="course-tab is-open" data-course="thu">
           <button class="course-tab-head" type="button" aria-expanded="true">
             <div class="course-tab-info">
-              <span class="course-tab-tag">4 — 6 歲 · 45 分鐘 · 9 堂</span>
-              <h3 class="course-tab-name">幼兒跑步體適能班</h3>
-              <p class="course-tab-desc">用遊戲,讓孩子愛上動。</p>
+              <span class="course-tab-tag">Thursday · 台北田徑場 · 12 堂 · 9/10 開課</span>
+              <h3 class="course-tab-name">週四班</h3>
+              <p class="course-tab-desc">整期 12 堂・NT$ 5,400</p>
             </div>
             <span class="course-tab-icon" aria-hidden="true">+</span>
           </button>
@@ -254,90 +254,81 @@
               <li class="schedule-row">
                 <div class="sr-time">
                   <span class="sr-day">週四</span>
-                  <span class="sr-hour">16:45-17:25</span>
+                  <span class="sr-hour">16:45</span>
                 </div>
-                <div class="sr-loc">板橋第一運動場</div>
+                <div class="sr-loc">週四北田幼兒跑步體適能班</div>
                 <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
               </li>
-              <li class="schedule-row">
-                <div class="sr-time">
-                  <span class="sr-day">週五</span>
-                  <span class="sr-hour">16:45-17:25</span>
-                </div>
-                <div class="sr-loc">台北田徑場</div>
-                <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
-              </li>
-              <li class="schedule-row">
-                <div class="sr-time">
-                  <span class="sr-day">週六</span>
-                  <span class="sr-hour">09:00-09:40</span>
-                </div>
-                <div class="sr-loc">台北田徑場</div>
-                <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
-              </li>
-            </ul>
-            <div class="course-tab-price">
-              <span class="price-line">整期 NT$ 4,050（可補課）／ 單堂 NT$ 500 ／ 插班私訊小編</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 卡片 2: 兒童趣味跑步班 -->
-        <div class="course-tab" data-course="fun">
-          <button class="course-tab-head" type="button" aria-expanded="false">
-            <div class="course-tab-info">
-              <span class="course-tab-tag">6 — 12 歲 · 50 分鐘 · 9 堂</span>
-              <h3 class="course-tab-name">兒童趣味跑步班</h3>
-              <p class="course-tab-desc">讓跑步,變成孩子想做的事。</p>
-            </div>
-            <span class="course-tab-icon" aria-hidden="true">+</span>
-          </button>
-          <div class="course-tab-body">
-            <ul class="schedule-rows">
               <li class="schedule-row">
                 <div class="sr-time">
                   <span class="sr-day">週四</span>
-                  <span class="sr-hour">17:45-18:45</span>
+                  <span class="sr-hour">17:45</span>
                 </div>
-                <div class="sr-loc">板橋第一運動場</div>
+                <div class="sr-loc">週四北田兒童趣味跑步班</div>
                 <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
-              </li>
-              <li class="schedule-row">
-                <div class="sr-time">
-                  <span class="sr-day">週五</span>
-                  <span class="sr-hour">17:45-18:45</span>
-                </div>
-                <div class="sr-loc">台北田徑場</div>
-                <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
-              </li>
-              <li class="schedule-row">
-                <div class="sr-time">
-                  <span class="sr-day">週六</span>
-                  <span class="sr-hour">10:00-11:00</span>
-                </div>
-                <div class="sr-loc">台北田徑場</div>
-                <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
               </li>
             </ul>
             <div class="course-tab-price">
-              <span class="price-line">整期 NT$ 4,050（可補課）／ 單堂 NT$ 500 ／ 插班私訊小編</span>
+              <span class="price-line">整期 12 堂 NT$ 5,400（一堂 NT$ 450）・9/10 開課</span>
             </div>
           </div>
         </div>
 
-        <!-- 卡片 3: 兒童跑步訓練班 -->
-        <div class="course-tab" data-course="train">
+        <!-- 卡片 2: 週五 -->
+        <div class="course-tab" data-course="fri">
           <button class="course-tab-head" type="button" aria-expanded="false">
             <div class="course-tab-info">
-              <span class="course-tab-tag">6 — 12 歲 · 60 分鐘 · 9 堂</span>
-              <h3 class="course-tab-name">兒童跑步訓練班</h3>
-              <p class="course-tab-desc">為想跑得更好的孩子設計。</p>
+              <span class="course-tab-tag">Friday · 台北田徑場 · 10 堂 · 9/11 開課</span>
+              <h3 class="course-tab-name">週五班</h3>
+              <p class="course-tab-desc">整期 10 堂・NT$ 4,500</p>
+            </div>
+            <span class="course-tab-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="course-tab-body">
+            <ul class="schedule-rows">
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">16:45</span>
+                </div>
+                <div class="sr-loc">週五北田幼兒跑步體適能班</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">17:45</span>
+                </div>
+                <div class="sr-loc">週五北田兒童趣味跑步班</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">18:45</span>
+                </div>
+                <div class="sr-loc">週五北田兒童趣味跑步班</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
+              </li>
+            </ul>
+            <div class="course-tab-price">
+              <span class="price-line">整期 10 堂 NT$ 4,500（一堂 NT$ 450）・9/11 開課</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 3: 週六 -->
+        <div class="course-tab" data-course="sat">
+          <button class="course-tab-head" type="button" aria-expanded="false">
+            <div class="course-tab-info">
+              <span class="course-tab-tag">Saturday · 台北田徑場 · 9 堂 · 9/12 開課</span>
+              <h3 class="course-tab-name">週六班</h3>
+              <p class="course-tab-desc">整期 9 堂・NT$ 4,050</p>
             </div>
             <span class="course-tab-icon" aria-hidden="true">+</span>
           </button>
@@ -346,22 +337,59 @@
               <li class="schedule-row">
                 <div class="sr-time">
                   <span class="sr-day">週六</span>
-                  <span class="sr-hour">07:15-08:15</span>
+                  <span class="sr-hour">07:15</span>
                 </div>
-                <div class="sr-loc">台北田徑場</div>
+                <div class="sr-loc">週六北田兒童跑步訓練班</div>
                 <div class="sr-meta"><span class="sr-spots"></span></div>
-                <a class="sr-cta" href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">私訊插班</a>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">09:00</span>
+                </div>
+                <div class="sr-loc">週六北田幼兒跑步體適能班</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">10:00</span>
+                </div>
+                <div class="sr-loc">週六北田兒童趣味跑步班</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/YXOoV" target="_blank" rel="noopener">馬上報名</a>
               </li>
             </ul>
             <div class="course-tab-price">
-              <span class="price-line">整期 NT$ 4,050（可補課）／ 單堂 NT$ 500 ／ 插班私訊小編</span>
+              <span class="price-line">整期 9 堂 NT$ 4,050（一堂 NT$ 450）・9/12 開課</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- 合作夥伴 (首頁可見版) -->
+      <!-- 學員福利 (MEMBER PERKS) -->
+      <div class="perks-strip">
+        <p class="partners-label" style="color:var(--yellow);">學員福利 · MEMBER PERKS</p>
+        <p class="partners-intro">成為 NID Kids 的學員，不只是上課——<br>還有這些專屬於孩子與家庭的福利。</p>
+        <div class="perks-list">
+          <div class="perk-card">
+            <span class="perk-icon" aria-hidden="true">🎈</span>
+            <h3 class="perk-name">每月 Family Day</h3>
+            <p class="perk-desc">每個月一場，帶孩子們一起來玩、一起放電。讓運動變成全家共享的日常，也讓孩子在課堂外多一個奔跑的理由。</p>
+            <span class="perk-tag">每月一場・學員專屬</span>
+          </div>
+          <div class="perk-card">
+            <span class="perk-icon" aria-hidden="true">🛒</span>
+            <h3 class="perk-name">固定團購優惠</h3>
+            <p class="perk-desc">NID Kids 有固定合作夥伴，定期開團，用優惠價把好物帶給每個家庭——挑鞋、裝備、生活好物，都幫你把關。</p>
+            <span class="perk-tag">定期開團・專屬價格</span>
+          </div>
+        </div>
+      </div>
+
       <div class="partners-strip partners-strip-dark">
         <p class="partners-label">合作夥伴 · PARTNER</p>
         <p class="partners-intro">不知道怎麼幫孩子挑跑鞋?我們推薦——</p>
@@ -375,12 +403,9 @@
         </div>
       </div>
 
-      <!-- 動態資料 fallback -->
-      <div class="schedule-list" id="schedule-list" style="display:none;"></div>
-
       <p class="schedule-footnote">
-        班次資訊每日更新。<br>
-        實際剩餘名額與最新優惠請以官方 LINE 確認為準。
+        名額有限，建議及早報名。<br>
+        班次與名額相關問題，歡迎透過官方 LINE 詢問。
       </p>
 
 
