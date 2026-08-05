@@ -1076,6 +1076,19 @@ a {
   font-size: 0.9rem;
 }
 
+.footer-logo-img {
+  display: block;
+  width: 96px;
+  height: auto;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 720px) {
+  .footer-logo-img {
+    width: 80px;
+  }
+}
+
 .footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
