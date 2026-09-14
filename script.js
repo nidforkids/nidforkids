@@ -3,15 +3,16 @@
    ============================ */
 
 /* ---------- 報名方式設定 ----------
-   報名改用 SurveyCake 外部表單；班次為靜態內容，不再連 Google Sheets。 */
+   本期已開課，報名改為私訊 LINE 官方帳號插班；不再使用 SurveyCake 表單。 */
 const LINE_URL = "https://lin.ee/PbnzLWp";
-const ENROLL_SURVEY_URL = "https://www.surveycake.com/s/YXOoV";
 
-// 所有 class="enroll-cta" 的按鈕統一導向 SurveyCake 報名表單
+// 所有 class="enroll-cta" 的按鈕統一導向 LINE 官方帳號（私訊插班）
 function applyEnrollCTA() {
   document.querySelectorAll(".enroll-cta").forEach(el => {
-    el.textContent = "馬上報名";
-    el.setAttribute("href", ENROLL_SURVEY_URL);
+    el.textContent = "私訊插班";
+    el.setAttribute("href", LINE_URL);
+    el.setAttribute("target", "_blank");
+    el.setAttribute("rel", "noopener");
   });
 }
 
