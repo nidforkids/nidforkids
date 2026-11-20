@@ -1,25 +1,573 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#102c32"><title>NID FOR KIDS｜找到孩子的跑步起點</title><style>
-:root{--ink:#17353a;--green:#a9db65;--cream:#f8f7ef;--muted:#6d7978;--line:#dce3dd}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif}header{background:#102c32;color:white;padding:17px 6%;display:flex;justify-content:space-between;align-items:center;font-weight:900;letter-spacing:.09em}header small{font-size:11px;color:var(--green)}main{max-width:790px;margin:38px auto 70px;padding:0 18px}.panel{background:white;border-radius:26px;padding:clamp(24px,5vw,48px);box-shadow:0 14px 55px #102c3210}.eyebrow{font-weight:800;color:#5a8552;letter-spacing:.16em;font-size:12px}.hero{font-size:clamp(35px,7vw,58px);line-height:1.2;letter-spacing:-.04em;margin:18px 0}h2{font-size:clamp(25px,5vw,34px);line-height:1.35;margin:12px 0 20px}p{line-height:1.85;color:#506463}.chip{display:inline-block;background:#e9f5d9;padding:8px 14px;border-radius:99px;font-size:13px;font-weight:800}.button{appearance:none;background:#183a3b;color:white;border:0;padding:16px 24px;border-radius:14px;font-size:16px;font-weight:800;cursor:pointer}.button:hover{background:#295b53}.button.secondary{background:#edf2ec;color:#21413b}.button:disabled{opacity:.35;cursor:not-allowed}.actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:25px}.progress{height:8px;background:#e9eee8;border-radius:50px;overflow:hidden;margin:18px 0 28px}.progress div{height:100%;background:#93cb61;transition:width .25s}.choice{display:block;width:100%;background:#fff;border:2px solid var(--line);padding:16px 18px;border-radius:15px;text-align:left;font-size:16px;color:var(--ink);margin:10px 0;cursor:pointer}.choice.active{border-color:#6eaa57;background:#f1f9e8;font-weight:800}.choice:hover{border-color:#93bb80}.field{display:block;margin:20px 0;font-weight:700}.field input,.field select{display:block;width:100%;border:1.5px solid #d5dfd8;border-radius:12px;margin-top:8px;padding:14px;font:inherit;background:white}.field small{display:block;font-weight:400;color:var(--muted);margin-top:5px}.note{font-size:13px;color:#71807b}.result{border-radius:19px;background:#edf6e5;padding:24px;margin:24px 0}.result h2{margin:8px 0}.alt{border:1px solid var(--line);border-radius:16px;padding:17px;margin:15px 0}.hidden{display:none!important}footer{text-align:center;font-size:12px;color:#7b8781;padding:20px}.qcount{font-weight:800;font-size:13px;color:#72817b}.tagrow{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.tag{padding:7px 12px;background:#eff2e9;border-radius:20px;font-size:12px;font-weight:700}.highlight{color:#6a9c40}a{color:#276e59} @media(max-width:480px){main{margin:20px auto 50px}.panel{border-radius:19px}.button{width:100%}.actions{flex-direction:column-reverse}}
-</style></head><body><header><div>NID <span style="color:#a9db65">FOR KIDS</span></div><small>ZERO TO HERO</small></header><main><section class="panel" id="welcome"><span class="chip">🏃 1 分鐘親子選班測驗</span><h1 class="hero">每個孩子，<br>都有自己的<br><span class="highlight">起跑線。</span></h1><p>第一次接觸跑步？喜歡跑跳遊戲？還是已經想挑戰自己的速度？回答幾個簡單問題，找出孩子適合的 NID FOR KIDS 課程起點。</p><div class="tagrow"><span class="tag">🌱 幼兒跑步體適能</span><span class="tag">🏃 兒童趣味跑步</span><span class="tag">⚡ 兒童跑步訓練</span></div><button class="button" onclick="show('profile')">開始測驗 →</button><p class="note">本測驗提供初步選班方向，不是體能測驗或正式分班評估。</p></section>
-<section class="panel hidden" id="profile"><div class="eyebrow">STEP 1 / 3 · 認識孩子</div><h2>先了解孩子的基本狀況 👋</h2><label class="field">孩子年齡（必填）<select id="age"><option value="">請選擇年齡</option><option value="4">4 歲</option><option value="5">5 歲</option><option value="6">6 歲</option><option value="7">7 歲</option><option value="8">8 歲</option><option value="9">9 歲</option><option value="10">10 歲</option><option value="11">11 歲</option><option value="12">12 歲</option><option value="13">13 歲以上</option></select></label><label class="field">孩子暱稱（選填）<input id="nickname" maxlength="30" placeholder="例如：小跑者"></label><label class="field">家長聯絡方式（選填）<input id="contact" maxlength="100" placeholder="LINE ID 或 Email"><small>填寫後，測驗結果與聯絡方式會傳送給 NID FOR KIDS，僅用於課程諮詢與體驗聯繫。</small></label><p class="note" id="ageNotice"></p><div class="actions"><button class="button secondary" onclick="show('welcome')">← 上一步</button><button class="button" onclick="start()">下一步 →</button></div></section>
-<section class="panel hidden" id="quiz"><div class="eyebrow">STEP 2 / 3 · 了解孩子</div><div class="progress"><div id="bar"></div></div><div class="qcount" id="qcount"></div><h2 id="question"></h2><div id="choices"></div><div class="actions"><button class="button secondary" onclick="back()">← 上一步</button><button class="button" id="next" onclick="next()" disabled>下一題 →</button></div></section>
-<section class="panel hidden" id="results"><div class="eyebrow">STEP 3 / 3 · YOUR BEST MATCH</div><h2>找到孩子的跑步起點！ 🎉</h2><p id="personal"></p><div class="result"><div class="eyebrow">最適合先體驗的班別</div><h2 id="best"></h2><p id="why"></p><div id="points" class="tagrow"></div></div><div class="alt"><strong>也可以考慮</strong><h3 id="second"></h3><p id="secondWhy"></p></div><p class="note" id="caution"></p><h3>想進一步了解或預約體驗？</h3><p>把測驗結果傳給 NID FOR KIDS，讓教練再依孩子的實際狀況提供建議。</p><div class="actions"><button class="button secondary" onclick="reset()">重新測驗</button><button class="button" onclick="share()">分享／複製測驗結果</button></div><p id="copyMsg" class="note" aria-live="polite"></p></section></main><footer>NID FOR KIDS · 陪孩子從 Zero to Hero<br>測驗結果僅供初步選班參考</footer><script>
-// ▼ 部署 Google Apps Script 後，把網址貼在這裡
-const SHEET_URL='https://script.google.com/macros/s/AKfycbzcsr8Z1ajwxgcb19kk8rknguLUHqro6ASEZPTokSSEIMf3ugG57H20rz05P0uKAlv20w/exec';
-function sendToSheet(data){if(!SHEET_URL.startsWith('https://'))return;try{fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})}catch(e){console.warn('資料傳送失敗',e)}}
-// 網址加上 ?start 可略過首頁，直接進入填答
-if(new URLSearchParams(location.search).has('start'))document.addEventListener('DOMContentLoaded',()=>show('profile'));
-const questions=[{q:'孩子平常參與運動的經驗如何？',o:[['new','較少規律運動，正在建立基礎'],['play','喜歡跑跳遊戲，有一些運動經驗'],['train','已有固定跑步或運動訓練經驗']]},{q:'孩子最喜歡哪一類活動？',o:[['basic','跑、跳、平衡和闖關探索'],['fun','追逐、接力、團隊遊戲'],['skill','挑戰速度、距離或跑步技巧']]},{q:'家長目前最希望孩子獲得什麼？',o:[['foundation','建立身體協調、平衡與基本動作能力'],['enjoy','培養運動興趣、建立跑姿基礎提升整體體能'],['performance','調整跑姿、加強跑步技巧提升運動表現']]},{q:'孩子面對跑步活動時，通常比較像哪一種？',o:[['explore','需要透過遊戲和引導慢慢熟悉'],['group','喜歡和其他孩子一起挑戰'],['goal','願意反覆練習，朝目標努力']]},{q:'目前最想嘗試的上課方式？',o:[['discover','多元動作遊戲，逐步建立身體能力'],['mixed','跑步技巧結合有趣的活動與挑戰'],['structured','有計畫地練習跑步技巧與體能']]}];
-const names={fitness:'🌱 幼兒跑步體適能班',fun:'🏃 兒童趣味跑步班',training:'⚡ 兒童跑步訓練班'};
-const descriptions={fitness:'從跑、跳、平衡與探索遊戲出發，建立動作基礎與運動信心。',fun:'結合趣味跑動、協調、肌力及基礎跑姿，讓孩子在挑戰中建立運動能力。',training:'透過系統化跑姿、節奏、速度及體能訓練，逐步提升跑步表現。'};
-let idx=0,answers={};function show(id){document.querySelectorAll('main>section').forEach(e=>e.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');window.scrollTo(0,0)}
-function start(){let age=document.getElementById('age').value;if(!age){document.getElementById('ageNotice').textContent='請先選擇孩子的年齡。';return}document.getElementById('ageNotice').textContent='';idx=0;render();show('quiz')}
-function render(){let q=questions[idx];document.getElementById('bar').style.width=(idx+1)/questions.length*100+'%';document.getElementById('qcount').textContent=`問題 ${idx+1} / ${questions.length}`;document.getElementById('question').textContent=q.q;document.getElementById('choices').innerHTML='';q.o.forEach(([v,t])=>{let b=document.createElement('button');b.className='choice'+(answers[idx]===v?' active':'');b.textContent=t;b.onclick=()=>{answers[idx]=v;render()};document.getElementById('choices').appendChild(b)});document.getElementById('next').disabled=!answers[idx];document.getElementById('next').textContent=idx===questions.length-1?'查看推薦結果 →':'下一題 →'}
-function back(){if(idx===0)show('profile');else{idx--;render()}}function next(){if(!answers[idx])return;if(idx<questions.length-1){idx++;render()}else finish()}
-function finish(){let age=Number(document.getElementById('age').value);let score={fitness:0,fun:0,training:0};let weights=[2,2,3,1,2];let maps=[{new:'fitness',play:'fun',train:'training'},{basic:'fitness',fun:'fun',skill:'training'},{foundation:'fitness',enjoy:'fun',performance:'training'},{explore:'fitness',group:'fun',goal:'training'},{discover:'fitness',mixed:'fun',structured:'training'}];for(let i=0;i<questions.length;i++)score[maps[i][answers[i]]]+=weights[i];let best,second,warning='';if(age<=5){best='fitness';second='fun';if(age===4)warning='幼兒班主要對象約 4.5–6 歲；若孩子尚未滿 4.5 歲，請先向教練確認是否適合參與。'}else if(age===6){best=score.training>=8?'training':score.fun>score.fitness?'fun':'fitness';second=best==='fitness'?'fun':best==='fun'?'fitness':'fun';if(best==='training')warning='6 歲孩子若希望進入跑步訓練班，建議先由教練確認動作基礎、參與意願與班級適配。'}else{best=score.training>=7?'training':'fun';second=best==='training'?'fun':'training';if(score.fitness>score.fun&&score.fitness>score.training)warning='孩子目前可能更需要基礎動作引導；建議先與教練討論課程難度與適應方式。'}
-let nickname=document.getElementById('nickname').value.trim();document.getElementById('personal').textContent=(nickname?nickname+'，':'')+'根據孩子的年齡、運動經驗與學習目標，我們推薦：';document.getElementById('best').textContent=names[best];document.getElementById('why').textContent=descriptions[best];document.getElementById('points').innerHTML=(best==='fitness'?['動作探索','平衡協調','遊戲體驗']:best==='fun'?['跑步興趣','體能協調','基礎跑姿']:['跑步技巧','速度節奏','系統訓練']).map(x=>'<span class="tag">'+x+'</span>').join('');document.getElementById('second').textContent=names[second];document.getElementById('secondWhy').textContent=descriptions[second];document.getElementById('caution').textContent=(warning?warning+' ':'')+'這是初步推薦，實際分班仍應由教練依孩子的動作能力、意願與班級年齡範圍確認。';window.quizResult={best,second,nickname,age};
-let ansText=questions.map((q,i)=>(q.o.find(o=>o[0]===answers[i])||['',''])[1]);
-sendToSheet({nickname,age,contact:document.getElementById('contact').value.trim(),q1:ansText[0],q2:ansText[1],q3:ansText[2],q4:ansText[3],q5:ansText[4],scoreFitness:score.fitness,scoreFun:score.fun,scoreTraining:score.training,best:names[best],second:names[second],warning,source:location.search,userAgent:navigator.userAgent});
-show('results')}
-async function share(){let r=window.quizResult;let txt=`NID FOR KIDS｜孩子的跑步起點測驗\n孩子：${r.nickname||'小跑者'}（${r.age} 歲）\n推薦：${names[r.best]}\n第二推薦：${names[r.second]}\n${descriptions[r.best]}`;try{if(navigator.share)await navigator.share({title:'NID FOR KIDS 測驗結果',text:txt});else if(navigator.clipboard){await navigator.clipboard.writeText(txt);document.getElementById('copyMsg').textContent='測驗結果已複製！'}else{prompt('複製測驗結果：',txt)}}catch(e){if(e.name!=='AbortError')prompt('複製測驗結果：',txt)}}function reset(){idx=0;answers={};document.getElementById('nickname').value='';document.getElementById('contact').value='';document.getElementById('age').value='';show('welcome')}
-</script></body></html>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NID KIDS｜專為孩子設計的兒童跑步課程，由專業跑步團隊打造，陪孩子建立自信、突破自我。Zero to Hero，從零開始，長成更勇敢的自己。">
+  <title>NID KIDS｜兒童跑步課程</title>
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NID KIDS｜兒童跑步課程">
+  <meta property="og:description" content="Zero to Hero，從零開始，長成更勇敢的自己。">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts: Noto Serif TC for editorial headlines + Noto Sans TC for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============= NAV ============= -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#top" class="nav-logo">
+        <img src="assets/logo-nid-wordmark.png" alt="NID KIDS" class="nav-logo-img" loading="lazy">
+      </a>
+      <div class="nav-links">
+        <a href="#about">關於</a>
+        <a href="#courses">課程</a>
+        <a href="#schedule">班次</a>
+        <a href="#faq">常見問題</a>
+        <a href="#contact" class="nav-cta">聯絡我們</a>
+      </div>
+      <button class="nav-toggle" aria-label="menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============= HERO ============= -->
+  <header class="hero" id="top">
+    <div class="hero-bg">
+      <img src="assets/hero-1.jpg" alt="" class="hero-img active" loading="eager">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-grain"></div>
+
+    <div class="hero-meta">
+      <span class="meta-left">ZERO TO HERO</span>
+      <span class="meta-right">2026 — KIDS</span>
+    </div>
+
+    <div class="hero-content">
+      <p class="eyebrow">專為孩子設計的跑步課程</p>
+      <h1 class="hero-title">
+        <span class="title-cn">從零開始</span>
+        <span class="title-cn yellow">長成更勇敢的自己</span>
+      </h1>
+      <p class="hero-sub">我們相信每個孩子都有自己的起點。<br>沒有誰該被同一套標準衡量。</p>
+      <div class="hero-actions">
+        <a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" class="btn btn-yellow">預約體驗・私訊小編</a>
+        <a href="#courses" class="btn btn-outline">看課程</a>
+        <a href="#schedule" class="btn btn-outline">看班次</a>
+      </div>
+    </div>
+
+    <div class="hero-foot">
+      <span class="hero-foot-left">NID KIDS — A SISTER BRAND OF NID RUN CLUB</span>
+      <span class="hero-foot-right">↓ SCROLL</span>
+    </div>
+  </header>
+
+  <!-- ============= ABOUT ============= -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <span class="section-label">ABOUT</span>
+      </div>
+
+      <h2 class="section-title">
+        我們從大人的跑道，<br>
+        <span class="yellow">跑進了孩子的世界。</span>
+      </h2>
+
+      <div class="about-grid">
+        <div class="about-text">
+          <p>NID Run Club 陪伴了許多大人在跑步中找回自己的節奏。而現在，我們把這份陪伴帶給更小的他們。</p>
+          <p>NID KIDS 不是補習班，也不是訓練營——而是一個讓孩子在運動中認識自己、累積勇氣的地方。</p>
+          <p class="about-emphasis">從「我可以試試看」到「我做到了！」<br>這段路，我們陪他們一起走。</p>
+        </div>
+
+        <div class="values">
+          <div class="value-item">
+            <span class="value-num">01</span>
+            <h3>有溫度</h3>
+            <p>不只是上課，而是陪孩子一起成長</p>
+          </div>
+          <div class="value-item">
+            <span class="value-num">02</span>
+            <h3>不隨便</h3>
+            <p>每堂課都用專業與品質對待</p>
+          </div>
+          <div class="value-item">
+            <span class="value-num">03</span>
+            <h3>聆聽</h3>
+            <p>傾聽孩子與家長的聲音，持續變得更好</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= COURSES ============= -->
+  <section class="section courses" id="courses">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <span class="section-label">COURSES</span>
+      </div>
+
+      <h2 class="section-title">
+        三種課程，<br>
+        <span class="yellow">找到孩子的位置。</span>
+      </h2>
+
+      <p class="section-lead">不管孩子從哪個階段加入，<br>我們都有對應他的成長路線。</p>
+
+      <div class="path-arrows">
+        <span>打基礎</span>
+        <span class="arrow">→</span>
+        <span>養興趣</span>
+        <span class="arrow">→</span>
+        <span>練實力</span>
+      </div>
+
+      <!-- Course list will be loaded from Sheets, with fallback static content -->
+      <div class="course-list" id="course-list">
+        <!-- 動態載入。以下是 fallback content，Sheets 未載入時顯示 -->
+
+        <article class="course-card">
+          <div class="course-card-img">
+            <img src="assets/hero-3.jpg" alt="幼兒跑步體適能班" loading="lazy">
+          </div>
+          <div class="course-card-body">
+            <div class="course-tag-row">
+              <span class="course-tag">4 — 6 歲</span>
+              <span class="course-pillar">打基礎</span>
+            </div>
+            <h3 class="course-name">幼兒跑步體適能班</h3>
+            <p class="course-tagline">用遊戲，讓孩子愛上動。</p>
+            <p class="course-desc">走、跑、跳、爬——這個階段不是學技術，是把身體用熟。讓孩子在玩之中，長出未來所有運動需要的底子。</p>
+            <ul class="course-features">
+              <li>體能基礎</li>
+              <li>協調發展</li>
+              <li>樂趣化學習</li>
+            </ul>
+            <a href="courses/kids-fitness.html" class="course-link">查看課程詳情 →</a>
+          </div>
+        </article>
+
+        <article class="course-card">
+          <div class="course-card-img">
+            <img src="assets/hero-1.jpg" alt="兒童趣味跑步班" loading="lazy">
+          </div>
+          <div class="course-card-body">
+            <div class="course-tag-row">
+              <span class="course-tag">6 — 12 歲</span>
+              <span class="course-pillar">養興趣</span>
+            </div>
+            <h3 class="course-name">兒童趣味跑步班</h3>
+            <p class="course-tagline">讓跑步，變成孩子想做的事。</p>
+            <p class="course-desc">不是為了比賽，而是為了讓他真的喜歡上跑步。從正確姿勢開始，每堂課都有挑戰與成就感，孩子越跑越有自信。</p>
+            <ul class="course-features">
+              <li>體能提升</li>
+              <li>協調訓練</li>
+              <li>跑姿優化</li>
+              <li>樂趣化學習</li>
+            </ul>
+            <a href="courses/kids-running-fun.html" class="course-link">查看課程詳情 →</a>
+          </div>
+        </article>
+
+        <article class="course-card">
+          <div class="course-card-img">
+            <img src="assets/hero-4.jpg" alt="兒童跑步訓練班" loading="lazy">
+          </div>
+          <div class="course-card-body">
+            <div class="course-tag-row">
+              <span class="course-tag">6 — 12 歲</span>
+              <span class="course-pillar">練實力</span>
+            </div>
+            <h3 class="course-name">兒童跑步訓練班</h3>
+            <p class="course-tagline">為想跑得更好的孩子設計。</p>
+            <p class="course-desc">有比賽目標、有突破渴望——這堂課陪他系統性訓練。專項體能、跑姿優化、配速練習，讓努力被看見。</p>
+            <ul class="course-features">
+              <li>專項訓練</li>
+              <li>體能強化</li>
+              <li>跑姿優化</li>
+              <li>賽事備戰</li>
+            </ul>
+            <a href="courses/kids-running-train.html" class="course-link">查看課程詳情 →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= SCHEDULE ============= -->
+  <section class="section schedule" id="schedule">
+    <div class="container">
+      <div class="section-head light">
+        <span class="section-num">03</span>
+        <span class="section-label">SCHEDULE</span>
+      </div>
+
+      <h2 class="section-title light">
+        找到適合的<br>
+        <span class="yellow">班次。</span>
+      </h2>
+
+      <p class="section-lead light">全部班次都在台北田徑場，依星期挑選最方便的時段。<br>不確定哪個適合？<a href="#contact" class="inline-link">私訊我們協助評估</a>。</p>
+
+      <!-- 期程資訊 -->
+      <p class="schedule-period">
+        <span class="period-badge">2026 冬季班</span>
+        <span class="period-text">台北田徑場 ｜ 12 月開課</span>
+      </p>
+
+      <!-- 插班提醒：12 月前現有班次仍可插班 -->
+      <p class="schedule-note" style="margin:0.9rem 0 0;padding:0.7rem 1rem;background:rgba(245,197,24,0.12);border-left:3px solid #F5C518;border-radius:6px;color:#fff;font-size:0.92rem;line-height:1.7;">
+        想立即開始上課？目前 12 月前的現有班次仍可隨時插班，<a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" style="color:#F5C518;font-weight:700;text-decoration:underline;">私訊小編</a>即可安排。
+      </p>
+
+      <!-- 班次卡片：按星期分（預設展開第一張） -->
+      <div class="course-tabs" id="course-tabs">
+
+        <!-- 卡片 2: 週五 -->
+        <div class="course-tab is-open" data-course="fri">
+          <button class="course-tab-head" type="button" aria-expanded="true">
+            <div class="course-tab-info">
+              <span class="course-tab-tag">Friday · 台北田徑場 · 9 堂 · 12/11 開課</span>
+              <h3 class="course-tab-name">週五班</h3>
+              <p class="course-tab-desc">整期 9 堂・NT$ 4,050</p>
+            </div>
+            <span class="course-tab-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="course-tab-body">
+            <ul class="schedule-rows">
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">16:45</span>
+                </div>
+                <div class="sr-loc">週五北田幼兒跑步體適能班 1645</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">17:45</span>
+                </div>
+                <div class="sr-loc">週五北田兒童趣味跑步班 1745</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週五</span>
+                  <span class="sr-hour">18:45</span>
+                </div>
+                <div class="sr-loc">週五北田兒童趣味跑步班 1845</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+            </ul>
+            <div class="course-tab-price">
+              <span class="price-line">整期 9 堂 NT$ 4,050（一堂 NT$ 450）・12/11 開課</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 卡片 3: 週六 -->
+        <div class="course-tab" data-course="sat">
+          <button class="course-tab-head" type="button" aria-expanded="false">
+            <div class="course-tab-info">
+              <span class="course-tab-tag">Saturday · 台北田徑場 · 上午 9 堂／下午 8 堂 · 12 月開課</span>
+              <h3 class="course-tab-name">週六班</h3>
+              <p class="course-tab-desc">上午場 9 堂 NT$ 4,050・下午場 8 堂 NT$ 3,600</p>
+            </div>
+            <span class="course-tab-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="course-tab-body">
+            <ul class="schedule-rows">
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">07:15</span>
+                </div>
+                <div class="sr-loc">週六北田兒童跑步訓練班 0715</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">09:00</span>
+                </div>
+                <div class="sr-loc">週六北田幼兒跑步體適能班 0900</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">10:00</span>
+                </div>
+                <div class="sr-loc">週六北田兒童趣味跑步班 1000</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+              <li class="schedule-row">
+                <div class="sr-time">
+                  <span class="sr-day">週六</span>
+                  <span class="sr-hour">16:00</span>
+                </div>
+                <div class="sr-loc">週六北田兒童跑步訓練班 1600</div>
+                <div class="sr-meta"><span class="sr-spots"></span></div>
+                <a class="sr-cta enroll-cta" href="https://www.surveycake.com/s/RLa8x" target="_blank" rel="noopener">點我報名</a>
+              </li>
+            </ul>
+            <div class="course-tab-price">
+              <span class="price-line" style="display:block;">上午場（07:15・09:00・10:00）整期 9 堂 NT$ 4,050・12/5 開課</span>
+              <span class="price-line" style="display:block;margin-top:0.25rem;">下午場（16:00 訓練班）整期 8 堂 NT$ 3,600・12/12 開課</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 學員福利 (MEMBER PERKS) -->
+      <div class="perks-strip">
+        <p class="partners-label" style="color:var(--yellow);">學員福利 · MEMBER PERKS</p>
+        <p class="partners-intro">成為 NID KIDS 的學員，不只是上課——<br>還有這些專屬於孩子與家庭的福利。</p>
+        <div class="perks-list">
+          <div class="perk-card">
+            <span class="perk-icon" aria-hidden="true">🎈</span>
+            <h3 class="perk-name">每月 Family Day</h3>
+            <p class="perk-desc">每個月一場，帶孩子們一起來玩、一起放電。讓運動變成全家共享的日常，也讓孩子在課堂外多一個奔跑的理由。</p>
+            <span class="perk-tag">每月一場・學員專屬</span>
+          </div>
+          <div class="perk-card">
+            <span class="perk-icon" aria-hidden="true">🛒</span>
+            <h3 class="perk-name">固定團購優惠</h3>
+            <p class="perk-desc">NID KIDS 有固定合作夥伴，定期開團，用優惠價把好物帶給每個家庭——挑鞋、裝備、生活好物，都幫你把關。</p>
+            <span class="perk-tag">定期開團・專屬價格</span>
+          </div>
+          <div class="perk-card">
+            <span class="perk-icon" aria-hidden="true">🎟️</span>
+            <h3 class="perk-name">續報九折優惠</h3>
+            <p class="perk-desc">舊生續報下一期，享整期學費 9 折。讓孩子一期接一期穩定成長，我們也用回饋謝謝你們的陪伴與信任。</p>
+            <span class="perk-tag">舊生續報・整期 9 折</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="partners-strip partners-strip-dark">
+        <p class="partners-label">合作夥伴 · PARTNER</p>
+        <p class="partners-intro">不知道怎麼幫孩子挑跑鞋?我們推薦——</p>
+        <div class="partners-list">
+          <a href="https://babyview.tw/" target="_blank" rel="noopener noreferrer" class="partner-card">
+            <img class="partner-logo" src="https://babyview.tw/image/catalog/LOGO/2311-topLOGO01.png" alt="布布童鞋" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <span class="partner-name-fallback" style="display:none;">布布童鞋</span>
+            <span class="partner-desc">專業童鞋顧問,為孩子挑選合腳的跑鞋</span>
+            <span class="partner-link">babyview.tw →</span>
+          </a>
+        </div>
+      </div>
+
+      <p class="schedule-footnote">
+        名額有限，建議及早報名。<br>
+        班次與名額相關問題，歡迎透過官方 LINE 詢問。
+      </p>
+
+
+    </div>
+  </section>
+
+  <!-- ============= FAQ ============= -->
+  <section class="section faq" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <span class="section-label">FAQ</span>
+      </div>
+
+      <h2 class="section-title">
+        家長常問<br>
+        <span class="yellow">的問題。</span>
+      </h2>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>孩子完全沒有運動基礎，可以參加嗎？</summary>
+          <div class="faq-answer">
+            <p>完全可以。我們的「幼兒跑步體適能」與「趣味跑步班」都是從零開始設計，第一堂課不會要求任何能力，重點是讓孩子先喜歡上動。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>孩子很怕生、會不會不敢上課？</summary>
+          <div class="faq-answer">
+            <p>我們有教練專門關注新加入的孩子，前 2-3 堂課會花更多時間讓他融入團體。如果擔心，可以先預約免費體驗。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>三種課程怎麼選？</summary>
+          <div class="faq-answer">
+            <p>簡單來說：<br>
+            <strong>幼兒跑步體適能（4-6 歲）</strong>｜打基礎，培養運動感<br>
+            <strong>趣味跑步班（6-12 歲）</strong>｜養興趣，建立習慣<br>
+            <strong>跑步訓練班（6-12 歲）</strong>｜練實力，有賽事目標<br>
+            不確定的話，建議從趣味跑步班開始，或直接私訊我們協助評估。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>跑步會影響孩子長高嗎？</summary>
+          <div class="faq-answer">
+            <p>適度跑步反而能刺激骨骼生長板、促進生長激素分泌。真正影響發育的是過量訓練與營養不足，而我們的課程都依照年齡設計合適的運動強度。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>下雨天怎麼辦？</summary>
+          <div class="faq-answer">
+            <p>下雨天會照常上課，課程內容會依照場地狀況調整(例如改在遮蔽區進行體能或核心訓練)。<br>
+            <strong>除非政府公告停班停課</strong>(如颱風假),才會停課並擇期補課。<br>
+            如有臨時異動,我們會在當天透過 LINE 通知。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>孩子請假可以補課嗎？</summary>
+          <div class="faq-answer">
+            <p>可以。只要在上課前向我們請假，就能補到本期其他同類型班次，不讓您的學費白費。為確保每位孩子都補得到，補課需符合以下條件：<br>
+            ・需<strong>事先請假</strong>，當天無故缺席恕無法補課<br>
+            ・補課需於<strong>該班最後一堂課前</strong>完成<br>
+            ・每位學員本期最多補 <strong>6 堂</strong><br>
+            請假與補課皆可透過 LINE 官方帳號安排，我們會協助您找到合適的班次。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>每堂課最多幾個孩子？</summary>
+          <div class="faq-answer">
+            <p>我們刻意把人數壓低,讓每個孩子都能被教練看見：<br>
+            <strong>幼兒跑步體適能班(4-6 歲)</strong>｜最多 6 人<br>
+            <strong>兒童趣味跑步班(6-12 歲)</strong>｜最多 10 人<br>
+            <strong>兒童跑步訓練班(6-12 歲)</strong>｜最多 20 人(2 位教練協同帶班)<br>
+            滿班後新名額需等下一期。</p>
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>家長可以陪同嗎？</summary>
+          <div class="faq-answer">
+            <p>可以在場邊觀察，但建議讓孩子自己上課，培養獨立性。新生剛開始可酌情陪同前 1-2 堂。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= CONTACT ============= -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-head light">
+        <span class="section-num">05</span>
+        <span class="section-label">CONTACT</span>
+      </div>
+
+      <h2 class="section-title light">
+        準備好讓孩子<br>
+        <span class="yellow">開始了嗎？</span>
+      </h2>
+
+      <p class="section-lead light">
+        從報名、體驗、到課程內容的任何疑問，<br>都歡迎透過以下方式聯繫我們。
+      </p>
+
+      <div class="contact-grid">
+        <a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">L</div>
+          <div class="contact-body">
+            <span class="contact-label">最快回覆</span>
+            <h3>LINE 官方</h3>
+            <p>加入後直接傳訊息<br>即時詢問班次與報名</p>
+          </div>
+          <span class="contact-arrow">↗</span>
+        </a>
+
+        <a href="https://www.instagram.com/nidforkids" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">IG</div>
+          <div class="contact-body">
+            <span class="contact-label">看看日常</span>
+            <h3>Instagram</h3>
+            <p>@nidforkids<br>追蹤我們，第一手課程資訊</p>
+          </div>
+          <span class="contact-arrow">↗</span>
+        </a>
+
+        <a href="mailto:nidforkids@gmail.com" class="contact-card">
+          <div class="contact-icon">@</div>
+          <div class="contact-body">
+            <span class="contact-label">深入合作</span>
+            <h3>Email</h3>
+            <p>nidforkids@gmail.com<br>團體預約、企業合作</p>
+          </div>
+          <span class="contact-arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============= FOOTER ============= -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo-img" src="assets/logo-nid-full.png" alt="NID KIDS" loading="lazy">
+          <p class="footer-tagline">ZERO TO HERO</p>
+          <p class="footer-name">NID KIDS</p>
+          <p class="footer-desc">A sister brand of NID Run Club.<br>陪孩子用運動長大。</p>
+        </div>
+
+        <div class="footer-links">
+          <p class="footer-h">SITEMAP</p>
+          <a href="#about">關於我們</a>
+          <a href="#courses">課程介紹</a>
+          <a href="#schedule">班次時段</a>
+          <a href="#faq">常見問題</a>
+          <a href="#contact">聯絡我們</a>
+        </div>
+
+        <div class="footer-links">
+          <p class="footer-h">CONNECT</p>
+          <a href="https://lin.ee/PbnzLWp" target="_blank" rel="noopener">LINE 官方</a>
+          <a href="https://www.instagram.com/nidforkids" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:nidforkids@gmail.com">Email</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NID KIDS. All rights reserved.</span>
+        <span>Made with ♥ in Taipei</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260914b"></script>
+</body>
+</html>
